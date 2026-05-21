@@ -13,18 +13,14 @@ function PrimaryButton({ children, onClick, href, icon, size = "md", style }) {
   const padding = size === "lg" ? "16px 32px" : size === "sm" ? "10px 18px" : "14px 26px";
   const fontSize = size === "lg" ? 16 : size === "sm" ? 12 : 14;
   const [hover, setHover] = useState(false);
-  const baseStyle = { border: "none", cursor: "pointer", background: "#2A8CFF", color: "#03081a",
-    fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize, textTransform: "uppercase",
-    letterSpacing: "0.04em", padding, borderRadius: 999,
-    boxShadow: hover ? "0 0 18px rgba(42,140,255,.85),0 0 48px rgba(42,140,255,.35)" : "0 0 14px rgba(42,140,255,.65),0 0 28px rgba(42,140,255,.25)",
-    display: "inline-flex", alignItems: "center", gap: 10, transition: "box-shadow 200ms cubic-bezier(.2,.8,.2,1)", textDecoration: "none", ...style };
-  if (href) return (
-    <a href={href} target="_blank" rel="noopener noreferrer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={baseStyle}>
-      {icon}{children}
-    </a>
-  );
+  const handleClick = href ? () => { window.location.href = href; } : onClick;
   return (
-    <button onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={baseStyle}>
+    <button onClick={handleClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{ border: "none", cursor: "pointer", background: "#2A8CFF", color: "#03081a",
+        fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize, textTransform: "uppercase",
+        letterSpacing: "0.04em", padding, borderRadius: 999,
+        boxShadow: hover ? "0 0 18px rgba(42,140,255,.85),0 0 48px rgba(42,140,255,.35)" : "0 0 14px rgba(42,140,255,.65),0 0 28px rgba(42,140,255,.25)",
+        display: "inline-flex", alignItems: "center", gap: 10, transition: "box-shadow 200ms cubic-bezier(.2,.8,.2,1)", ...style }}>
       {icon}{children}
     </button>
   );
@@ -32,18 +28,14 @@ function PrimaryButton({ children, onClick, href, icon, size = "md", style }) {
 
 function CapsuleButton({ children, onClick, href, icon, style }) {
   const [hover, setHover] = useState(false);
-  const baseStyle = { background: hover ? "rgba(42,140,255,.18)" : "rgba(6,17,48,.5)", color: "#fff",
-    fontFamily: "var(--cp-font-display)", fontWeight: 700, fontSize: 14, textTransform: "uppercase",
-    letterSpacing: "0.04em", padding: "14px 22px", borderRadius: 999, border: "none",
-    boxShadow: "inset 0 0 0 1.5px rgba(42,140,255,.85),inset 0 0 12px rgba(42,140,255,.35),0 0 8px rgba(42,140,255,.55)",
-    cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 10, transition: "background 200ms ease", textDecoration: "none", ...style };
-  if (href) return (
-    <a href={href} target="_blank" rel="noopener noreferrer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={baseStyle}>
-      {icon}{children}
-    </a>
-  );
+  const handleClick = href ? () => { window.location.href = href; } : onClick;
   return (
-    <button onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={baseStyle}>
+    <button onClick={handleClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{ background: hover ? "rgba(42,140,255,.18)" : "rgba(6,17,48,.5)", color: "#fff",
+        fontFamily: "var(--cp-font-display)", fontWeight: 700, fontSize: 14, textTransform: "uppercase",
+        letterSpacing: "0.04em", padding: "14px 22px", borderRadius: 999, border: "none",
+        boxShadow: "inset 0 0 0 1.5px rgba(42,140,255,.85),inset 0 0 12px rgba(42,140,255,.35),0 0 8px rgba(42,140,255,.55)",
+        cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 10, transition: "background 200ms ease", ...style }}>
       {icon}{children}
     </button>
   );

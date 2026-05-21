@@ -112,10 +112,10 @@ function ProductPortal({ kind, d }) {
           </li>
         ))}
       </ul>
-      <a href={isBot ? "https://wa.me/5511940122438" : "https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY"} target="_blank" rel="noopener noreferrer" style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em", color: data.color, textDecoration: "none" }}>
+      <div onClick={() => { window.location.href = isBot ? "https://wa.me/5511940122438" : "https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY"; }} style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em", color: data.color, cursor: "pointer" }}>
         {isBot ? "Falar com o bot" : "Entrar no grupo"}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={data.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: hover ? "translateX(3px)" : "none", transition: "transform 200ms" }}>{Icons.arrow}</svg>
-      </a>
+      </div>
     </div>
   );
 }
