@@ -24,13 +24,14 @@ function Eyebrow({ children, color = "var(--cp-blue-300)", style }) {
   return <div style={{ fontFamily: "var(--cp-font-display)", fontWeight: 700, fontSize: 12, textTransform: "uppercase", letterSpacing: "0.14em", color, ...style }}>{children}</div>;
 }
 
-function PrimaryButton({ children, onClick, icon, size = "md", style }) {
+function PrimaryButton({ children, onClick, href, icon, size = "md", style }) {
   const padY = size === "lg" ? 18 : size === "sm" ? 10 : 14;
   const padX = size === "lg" ? 34 : size === "sm" ? 18 : 26;
   const fontSize = size === "lg" ? 16 : size === "sm" ? 12 : 14;
   const [hover, setHover] = useState(false);
+  const handleClick = href ? () => { window.location.href = href; } : onClick;
   return (
-    <button onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+    <button onClick={handleClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{ border: "none", cursor: "pointer", background: "var(--cp-accent)", color: "#03081a",
         fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize, textTransform: "uppercase",
         letterSpacing: "0.04em", padding: `${padY}px ${padX}px`, borderRadius: 999,
@@ -42,13 +43,14 @@ function PrimaryButton({ children, onClick, icon, size = "md", style }) {
   );
 }
 
-function CapsuleButton({ children, onClick, icon, size = "md", style }) {
+function CapsuleButton({ children, onClick, href, icon, size = "md", style }) {
   const padY = size === "lg" ? 18 : size === "sm" ? 10 : 14;
   const padX = size === "lg" ? 30 : size === "sm" ? 18 : 22;
   const fontSize = size === "lg" ? 15 : size === "sm" ? 12 : 14;
   const [hover, setHover] = useState(false);
+  const handleClick = href ? () => { window.location.href = href; } : onClick;
   return (
-    <button onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+    <button onClick={handleClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{ background: hover ? "rgba(42,140,255,.18)" : "rgba(6,17,48,.5)", color: "#fff",
         fontFamily: "var(--cp-font-display)", fontWeight: 700, fontSize, textTransform: "uppercase",
         letterSpacing: "0.04em", padding: `${padY}px ${padX}px`, borderRadius: 999, border: "none",
