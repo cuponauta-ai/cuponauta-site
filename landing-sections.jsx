@@ -25,8 +25,8 @@ function HeroA({ d }) {
             O <strong style={{color:"#fff"}}>Bot</strong> acompanha os produtos que você está de olho. O <strong style={{color:"#fff"}}>Grupo</strong> recebe as melhores ofertas o dia inteiro. Você escolhe como quer economizar.
           </p>
           <div style={{ marginTop: 28, display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <PrimaryButton size="lg">Falar com o bot</PrimaryButton>
-            <CapsuleButton size="lg">Entrar no grupo</CapsuleButton>
+            <PrimaryButton size="lg" href="https://wa.me/5511940122438">Falar com o bot</PrimaryButton>
+            <CapsuleButton size="lg" href="https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY">Entrar no grupo</CapsuleButton>
           </div>
         </div>
         <div style={{ position: "relative", height: d.s(520), display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -55,8 +55,8 @@ function HeroB({ d }) {
             Receba as melhores ofertas direto no WhatsApp. Use o bot pra acompanhar produtos no Mercado Livre, ou entre no grupo que recebe oferta o dia inteiro.
         </p>
         <div style={{ marginTop: 30, display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <PrimaryButton size="lg">Falar com o bot</PrimaryButton>
-          <CapsuleButton size="lg">Entrar no grupo</CapsuleButton>
+          <PrimaryButton size="lg" href="https://wa.me/5511940122438">Falar com o bot</PrimaryButton>
+          <CapsuleButton size="lg" href="https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY">Entrar no grupo</CapsuleButton>
         </div>
       </div>
     </section>
@@ -112,10 +112,10 @@ function ProductPortal({ kind, d }) {
           </li>
         ))}
       </ul>
-      <div style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em", color: data.color }}>
+      <a href={isBot ? "https://wa.me/5511940122438" : "https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY"} target="_blank" rel="noopener noreferrer" style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em", color: data.color, textDecoration: "none" }}>
         {isBot ? "Falar com o bot" : "Entrar no grupo"}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={data.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: hover ? "translateX(3px)" : "none", transition: "transform 200ms" }}>{Icons.arrow}</svg>
-      </div>
+      </a>
     </div>
   );
 }
@@ -192,7 +192,7 @@ function BigProductCard({ kind, d }) {
       </ul>
       {isBot ? <BotPreview/> : <GroupPreview/>}
       <div style={{ marginTop: 22, position: "relative" }}>
-        <PrimaryButton size="md" style={{ background: data.color, boxShadow: `0 0 14px ${data.color}99, 0 0 28px ${data.color}55` }}>{data.cta}</PrimaryButton>
+        <PrimaryButton size="md" href={isBot ? "https://wa.me/5511940122438" : "https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY"} style={{ background: data.color, boxShadow: `0 0 14px ${data.color}99, 0 0 28px ${data.color}55` }}>{data.cta}</PrimaryButton>
       </div>
     </div>
   );
@@ -378,8 +378,8 @@ function FinalCTA({ d }) {
           Comece agora pelo WhatsApp. É grátis e a gente não enche o seu chat.
         </p>
         <div style={{ marginTop: 28, display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
-          <PrimaryButton size="lg">Falar com o bot</PrimaryButton>
-          <CapsuleButton size="lg">Entrar no grupo</CapsuleButton>
+          <PrimaryButton size="lg" href="https://wa.me/5511940122438">Falar com o bot</PrimaryButton>
+          <CapsuleButton size="lg" href="https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY">Entrar no grupo</CapsuleButton>
         </div>
       </div>
     </section>
