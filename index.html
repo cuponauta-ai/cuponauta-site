@@ -57,10 +57,13 @@
     .cp-steps { grid-template-columns: 1fr !important; }
     .cp-brands { grid-template-columns: repeat(3, 1fr) !important; }
     .cp-footer-grid { grid-template-columns: 1fr 1fr !important; }
+    .cp-hero-b-mascot img { width: 220px !important; }
   }
   @media (max-width: 500px) {
     .cp-brands { grid-template-columns: repeat(2, 1fr) !important; }
+    .cp-brands > *:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 50%; margin: 0 auto; width: 100%; }
     .cp-footer-grid { grid-template-columns: 1fr !important; }
+    .cp-hero-b-mascot img { width: 180px !important; }
   }
 </style>
 </head>

@@ -43,7 +43,7 @@ function HeroB({ d }) {
     <section style={{ position: "relative", padding: `${d.s(40)}px 20px ${d.s(64)}px`, overflow: "hidden", textAlign: "center" }}>
       <FloatingProps density={0.8}/>
       <div style={{ position: "relative", maxWidth: 1000, margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: -10 }}>
+        <div className="cp-hero-b-mascot" style={{ display: "flex", justifyContent: "center", marginBottom: -10 }}>
           <Mascot size={360} float={false}/>
         </div>
         <Eyebrow color="var(--cp-accent)" style={{ marginTop: 10 }}>Promoções e cupons o dia inteiro</Eyebrow>
