@@ -24,7 +24,7 @@ const { useState, useEffect } = React;
 const canais = [
   {
     label: 'Instagram', handle: '@cuponautaai',
-    desc: 'Canal principal para duvidas, sugestoes e novidades.',
+    desc: 'Canal principal para dúvidas, sugestões e novidades.',
     href: 'https://www.instagram.com/cuponautaai',
     cta: 'Abrir Instagram', color: 'var(--cp-accent)',
     icon: (
@@ -37,7 +37,7 @@ const canais = [
   },
   {
     label: 'WhatsApp Bot', handle: 'Cuponauta Bot',
-    desc: 'Fale com o bot para monitorar precos de produtos.',
+    desc: 'Fale com o bot para monitorar preços de produtos.',
     href: 'https://wa.me/5511940122438',
     cta: 'Abrir no WhatsApp', color: '#25D366',
     icon: (
@@ -124,12 +124,12 @@ function App() {
         <div style={{textAlign:'center',marginBottom:56}}>
           <div style={{fontFamily:'var(--cp-font-display)',fontWeight:700,fontSize:12,textTransform:'uppercase',letterSpacing:'0.14em',color:'var(--cp-accent)',marginBottom:12}}>Fale com a gente</div>
           <h1 style={{fontFamily:'var(--cp-font-display)',fontWeight:900,fontSize:'clamp(36px,5vw,64px)',lineHeight:.95,letterSpacing:'-0.025em',textTransform:'uppercase',color:'#fff',margin:'0 0 18px'}}>CONTATO</h1>
-          <p style={{fontFamily:'var(--cp-font-body)',fontSize:17,color:'var(--cp-fg-2)',lineHeight:1.6,maxWidth:480,margin:'0 auto'}}>Duvida, sugestao ou so quer bater um papo? Escolha o canal.</p>
+          <p style={{fontFamily:'var(--cp-font-body)',fontSize:17,color:'var(--cp-fg-2)',lineHeight:1.6,maxWidth:480,margin:'0 auto'}}>Dúvida, sugestão ou só quer bater um papo? Escolha o canal.</p>
         </div>
         <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:20}}>
           {canais.map(c => <Card key={c.label} {...c}/>)}
         </div>
-        <p style={{marginTop:48,textAlign:'center',fontFamily:'var(--cp-font-mono)',fontSize:12,color:'var(--cp-fg-3)',letterSpacing:'0.08em'}}>RESPONDEMOS EM ATE 24H</p>
+        <p style={{marginTop:48,textAlign:'center',fontFamily:'var(--cp-font-mono)',fontSize:12,color:'var(--cp-fg-3)',letterSpacing:'0.08em'}}>RESPONDEMOS EM ATÉ 24H</p>
       </section>
       <Footer/>
     </div>

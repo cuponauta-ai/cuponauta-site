@@ -23,22 +23,22 @@ const { useState, useEffect } = React;
 
 const faqs = [
   { cat: 'O Bot', items: [
-    { q: 'Como funciona o bot do Cuponauta?', a: 'Manda o link de qualquer produto do Mercado Livre no WhatsApp do bot. Ele fica de olho no preco e te avisa quando cair.' },
-    { q: 'O bot e gratuito?', a: 'Sim, 100% gratuito. Voce nao paga nada.' },
-    { q: 'Quais lojas o bot monitora?', a: 'Por enquanto, so o Mercado Livre. Mais lojas chegam em breve.' },
-    { q: 'Quantos produtos posso monitorar?', a: 'Varios ao mesmo tempo. Basta mandar os links um por um para o bot.' },
-    { q: 'Como acesso o bot?', a: 'Clique no botao Falar com o bot em qualquer pagina do Cuponauta. Vai abrir direto no WhatsApp.' },
+    { q: 'Como funciona o bot do Cuponauta?', a: 'Manda o link de qualquer produto do Mercado Livre no WhatsApp do bot. Ele fica de olho no preço e te avisa quando cair.' },
+    { q: 'O bot é gratuito?', a: 'Sim, 100% gratuito. Você não paga nada.' },
+    { q: 'Quais lojas o bot monitora?', a: 'Por enquanto, só o Mercado Livre. Mais lojas chegam em breve.' },
+    { q: 'Quantos produtos posso monitorar?', a: 'Vários ao mesmo tempo. É só mandar os links um por um para o bot.' },
+    { q: 'Como acesso o bot?', a: 'Clique no botão Falar com o bot em qualquer página do Cuponauta. Vai abrir direto no WhatsApp.' },
   ]},
   { cat: 'O Grupo', items: [
-    { q: 'O que e o Grupo do Cuponauta?', a: 'Um grupo no WhatsApp onde a gente manda as melhores promos do dia: Mercado Livre, Shopee, iFood, Magalu e Amazon.' },
-    { q: 'O grupo tambem e gratuito?', a: 'Sim, entrar no grupo e gratuito.' },
-    { q: 'Com que frequencia chegam as promos?', a: 'Ao longo do dia, so quando vale a pena. A gente filtra antes de mandar.' },
+    { q: 'O que é o Grupo do Cuponauta?', a: 'Um grupo no WhatsApp onde a gente manda as melhores promos do dia: Mercado Livre, Shopee, iFood, Magalu e Amazon.' },
+    { q: 'O grupo também é gratuito?', a: 'Sim, entrar no grupo é gratuito.' },
+    { q: 'Com que frequência chegam as promos?', a: 'Ao longo do dia, só quando vale a pena. A gente filtra antes de mandar.' },
     { q: 'Posso usar o bot e o grupo ao mesmo tempo?', a: 'Claro, os dois funcionam de forma independente e se complementam.' },
   ]},
   { cat: 'Geral', items: [
-    { q: 'O Cuponauta e seguro?', a: 'Sim. Nao pedimos nenhum dado pessoal, login ou senha. Voce interage so pelo WhatsApp.' },
-    { q: 'Voces ganham comissao nas compras?', a: 'Sim, usamos links de afiliado. Quando voce compra pelo link indicado, recebemos uma pequena comissao da loja, sem custo adicional para voce.' },
-    { q: 'Como entro em contato?', a: 'Pelo Instagram @cuponautaai ou pela pagina de contato.' },
+    { q: 'O Cuponauta é seguro?', a: 'Sim. Não pedimos nenhum dado pessoal, login ou senha. Você interage só pelo WhatsApp.' },
+    { q: 'Vocês ganham comissão nas compras?', a: 'Sim, usamos links de afiliado. Quando você compra pelo link indicado, recebemos uma pequena comissão da loja, sem custo adicional para você.' },
+    { q: 'Como entro em contato?', a: 'Pelo Instagram @cuponautaai ou pela página de contato.' },
   ]},
 ];
 
@@ -100,7 +100,7 @@ function App() {
       <Header/>
       <section style={{padding:'64px clamp(20px,5vw,64px) 96px',maxWidth:800,margin:'0 auto'}}>
         <div style={{textAlign:'center',marginBottom:56}}>
-          <div style={{fontFamily:'var(--cp-font-display)',fontWeight:700,fontSize:12,textTransform:'uppercase',letterSpacing:'0.14em',color:'var(--cp-accent)',marginBottom:12}}>Tire suas duvidas</div>
+          <div style={{fontFamily:'var(--cp-font-display)',fontWeight:700,fontSize:12,textTransform:'uppercase',letterSpacing:'0.14em',color:'var(--cp-accent)',marginBottom:12}}>Tire suas dúvidas</div>
           <h1 style={{fontFamily:'var(--cp-font-display)',fontWeight:900,fontSize:'clamp(36px,5vw,64px)',lineHeight:.95,letterSpacing:'-0.025em',textTransform:'uppercase',color:'#fff',margin:0}}>
             PERGUNTAS<br/><span style={{color:'var(--cp-accent)'}}>FREQUENTES</span>
           </h1>
@@ -112,7 +112,7 @@ function App() {
           </div>
         ))}
         <div style={{marginTop:64,textAlign:'center',padding:'40px 32px',background:'linear-gradient(180deg,rgba(15,38,96,.6),rgba(6,17,48,.8))',borderRadius:20,border:'1px solid rgba(91,168,255,.3)'}}>
-          <p style={{fontFamily:'var(--cp-font-body)',fontSize:16,color:'var(--cp-fg-2)',margin:'0 0 20px'}}>Nao encontrou o que procurava?</p>
+          <p style={{fontFamily:'var(--cp-font-body)',fontSize:16,color:'var(--cp-fg-2)',margin:'0 0 20px'}}>Não encontrou o que procurava?</p>
           <a href='contato.html' style={{fontFamily:'var(--cp-font-display)',fontWeight:900,fontSize:14,textTransform:'uppercase',letterSpacing:'0.04em',color:'#03081a',background:'var(--cp-accent)',padding:'14px 26px',borderRadius:999,textDecoration:'none',display:'inline-block',boxShadow:'0 0 14px var(--cp-accent-glow-strong)'}}>Falar com a gente</a>
         </div>
       </section>
