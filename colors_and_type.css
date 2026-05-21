@@ -1,0 +1,204 @@
+/* =========================================================
+   Cuponauta Design System – Tokens
+   Futurist e-commerce / coupons brand. Dark mode first.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* ---------- Brand color palette ---------- */
+  /* Deep space navy — the dominant background */
+  --cp-navy-950: #03081a;       /* deepest, used for vignettes & shadows */
+  --cp-navy-900: #061130;       /* primary background */
+  --cp-navy-800: #0a1a44;       /* surface / card background */
+  --cp-navy-700: #0f2660;       /* elevated surface */
+  --cp-navy-600: #143082;       /* hover surface */
+  --cp-navy-500: #1c44b5;       /* deep brand blue */
+
+  /* Neon brand blue — the signature accent */
+  --cp-blue-400: #2A8CFF;       /* primary brand blue (logo "NAUTA") */
+  --cp-blue-500: #1A8CFF;       /* CTA / focus / active */
+  --cp-blue-300: #5BA8FF;       /* lighter, for highlights */
+  --cp-blue-200: #9CCBFF;       /* subtle tints */
+  --cp-cyan-300: #6EE7FF;       /* mascot face glow / icons */
+
+  /* Orange accents — used sparingly (mascot antenna, alerts) */
+  --cp-orange-500: #FF8A1F;
+  --cp-orange-400: #FFA552;
+
+  /* Neutrals */
+  --cp-white: #FFFFFF;
+  --cp-fg-1: #FFFFFF;           /* primary text on dark */
+  --cp-fg-2: #C9D6F2;           /* secondary text */
+  --cp-fg-3: #8AA0CC;           /* tertiary / captions */
+  --cp-fg-4: #4F6A99;           /* muted */
+
+  /* Semantic */
+  --cp-success: #2BD68A;
+  --cp-warning: #FFB020;
+  --cp-danger:  #FF4D6A;
+
+  /* Surfaces */
+  --cp-bg:           var(--cp-navy-900);
+  --cp-bg-elevated:  var(--cp-navy-800);
+  --cp-bg-deeper:    var(--cp-navy-950);
+  --cp-surface:      #0b1a48;
+  --cp-stroke:       rgba(122, 175, 255, 0.18);
+  --cp-stroke-strong:rgba(122, 175, 255, 0.45);
+
+  /* ---------- Glow / shadow system ---------- */
+  /* Outer glows = the brand's signature; built from neon blue */
+  --cp-glow-sm: 0 0 8px rgba(42, 140, 255, 0.55);
+  --cp-glow-md: 0 0 14px rgba(42, 140, 255, 0.65), 0 0 28px rgba(42, 140, 255, 0.25);
+  --cp-glow-lg: 0 0 18px rgba(42, 140, 255, 0.85), 0 0 48px rgba(42, 140, 255, 0.35);
+  --cp-glow-cyan: 0 0 12px rgba(110, 231, 255, 0.85), 0 0 32px rgba(110, 231, 255, 0.35);
+  --cp-glow-orange: 0 0 10px rgba(255, 138, 31, 0.7);
+
+  /* Conventional shadows for depth (cards over dark bg) */
+  --cp-shadow-1: 0 1px 2px rgba(0,0,0,.35);
+  --cp-shadow-2: 0 6px 16px rgba(0,0,0,.45);
+  --cp-shadow-3: 0 18px 48px rgba(0,0,0,.55);
+
+  /* Inner glow line — for capsule outlines */
+  --cp-inner-glow: inset 0 0 0 1.5px rgba(42, 140, 255, .85), inset 0 0 12px rgba(42, 140, 255, .35);
+
+  /* ---------- Radii ---------- */
+  --cp-radius-xs: 6px;
+  --cp-radius-sm: 10px;
+  --cp-radius-md: 14px;
+  --cp-radius-lg: 20px;
+  --cp-radius-xl: 28px;
+  --cp-radius-pill: 999px;
+
+  /* ---------- Spacing (4-pt scale) ---------- */
+  --cp-s-1: 4px;
+  --cp-s-2: 8px;
+  --cp-s-3: 12px;
+  --cp-s-4: 16px;
+  --cp-s-5: 24px;
+  --cp-s-6: 32px;
+  --cp-s-7: 48px;
+  --cp-s-8: 64px;
+  --cp-s-9: 96px;
+
+  /* ---------- Typography ---------- */
+  --cp-font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --cp-font-body:    "Montserrat", "Inter", system-ui, sans-serif;
+  --cp-font-mono:    "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  /* Type scale — mobile-first display sizes */
+  --cp-fs-display-xl: clamp(48px, 8vw, 96px);
+  --cp-fs-display-lg: clamp(36px, 6vw, 64px);
+  --cp-fs-h1: 40px;
+  --cp-fs-h2: 28px;
+  --cp-fs-h3: 22px;
+  --cp-fs-h4: 18px;
+  --cp-fs-body: 16px;
+  --cp-fs-small: 14px;
+  --cp-fs-eyebrow: 12px;
+
+  /* Line heights — tight on display, comfy on body */
+  --cp-lh-display: 0.95;
+  --cp-lh-heading: 1.1;
+  --cp-lh-body: 1.5;
+
+  /* Tracking — display uses tight, eyebrow uses wide */
+  --cp-tr-tight: -0.02em;
+  --cp-tr-normal: 0;
+  --cp-tr-eyebrow: 0.12em;
+
+  /* Background grid (signature dotted halftone) */
+  --cp-grid-dot: rgba(122, 175, 255, 0.08);
+}
+
+/* =========================================================
+   Element-level defaults — paste into product roots
+   ========================================================= */
+
+.cp-root,
+.cp-root * {
+  box-sizing: border-box;
+}
+
+.cp-root {
+  background: var(--cp-bg);
+  color: var(--cp-fg-1);
+  font-family: var(--cp-font-body);
+  font-size: var(--cp-fs-body);
+  line-height: var(--cp-lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display (poster headlines like "AS FIGURINHAS DA COPA 2026") */
+.cp-display, .cp-h-display {
+  font-family: var(--cp-font-display);
+  font-weight: 900;                /* Black */
+  font-size: var(--cp-fs-display-lg);
+  line-height: var(--cp-lh-display);
+  letter-spacing: var(--cp-tr-tight);
+  text-transform: uppercase;
+  color: var(--cp-fg-1);
+}
+.cp-display--accent { color: var(--cp-blue-400); }
+
+/* Headings */
+.cp-h1 { font-family: var(--cp-font-display); font-weight: 800; font-size: var(--cp-fs-h1); line-height: var(--cp-lh-heading); letter-spacing: var(--cp-tr-tight); text-transform: uppercase; }
+.cp-h2 { font-family: var(--cp-font-display); font-weight: 800; font-size: var(--cp-fs-h2); line-height: var(--cp-lh-heading); letter-spacing: var(--cp-tr-tight); text-transform: uppercase; }
+.cp-h3 { font-family: var(--cp-font-display); font-weight: 700; font-size: var(--cp-fs-h3); line-height: var(--cp-lh-heading); letter-spacing: var(--cp-tr-tight); text-transform: uppercase; }
+.cp-h4 { font-family: var(--cp-font-display); font-weight: 700; font-size: var(--cp-fs-h4); line-height: var(--cp-lh-heading); }
+
+/* Body */
+.cp-body  { font-size: var(--cp-fs-body);  font-weight: 500; color: var(--cp-fg-2); }
+.cp-small { font-size: var(--cp-fs-small); font-weight: 500; color: var(--cp-fg-3); }
+
+/* Eyebrow / label — wide tracked all-caps used everywhere */
+.cp-eyebrow {
+  font-family: var(--cp-font-display);
+  font-size: var(--cp-fs-eyebrow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--cp-tr-eyebrow);
+  color: var(--cp-blue-300);
+}
+
+/* Mono — for codes / coupon strings */
+.cp-mono { font-family: var(--cp-font-mono); letter-spacing: 0.04em; }
+
+/* =========================================================
+   Signature surfaces & primitives
+   ========================================================= */
+
+/* Signature background — deep navy + faint dotted grid + radial glow */
+.cp-bg-signature {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(42, 140, 255, 0.18), transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(42, 140, 255, 0.10), transparent 50%),
+    radial-gradient(circle, var(--cp-grid-dot) 1px, transparent 1.2px) 0 0 / 22px 22px,
+    var(--cp-bg);
+}
+
+/* Capsule with neon outline — used for CTAs, info pills, logo lockup */
+.cp-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cp-s-3);
+  padding: 14px 22px;
+  border-radius: var(--cp-radius-pill);
+  background: rgba(6, 17, 48, 0.5);
+  box-shadow: var(--cp-inner-glow), var(--cp-glow-sm);
+  color: var(--cp-fg-1);
+  font-family: var(--cp-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Card with stroke + soft shadow */
+.cp-card {
+  background: linear-gradient(180deg, rgba(15, 38, 96, 0.6), rgba(6, 17, 48, 0.6));
+  border: 1px solid var(--cp-stroke);
+  border-radius: var(--cp-radius-lg);
+  box-shadow: var(--cp-shadow-2);
+  padding: var(--cp-s-5);
+}

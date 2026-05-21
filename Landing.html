@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cuponauta — Promoções, cupons e achados direto no seu Telegram</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background: var(--cp-bg); color: var(--cp-fg-1); font-family: var(--cp-font-body); scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(ellipse at 50% 0%, var(--cp-bg-glow-top, rgba(42, 140, 255, 0.18)), transparent 60%),
+      radial-gradient(ellipse at 100% 100%, var(--cp-bg-glow-bot, rgba(42, 140, 255, 0.10)), transparent 50%),
+      radial-gradient(circle, rgba(122, 175, 255, 0.06) 1px, transparent 1.2px) 0 0 / 22px 22px,
+      var(--cp-bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--cp-accent); color: #03081a; }
+
+  /* Default accent palette — overridden by data-palette */
+  :root {
+    --cp-accent: var(--cp-blue-400);
+    --cp-accent-glow: rgba(42, 140, 255, 0.35);
+    --cp-accent-glow-strong: rgba(42, 140, 255, 0.85);
+    --cp-bg-glow-top: rgba(42, 140, 255, 0.18);
+    --cp-bg-glow-bot: rgba(42, 140, 255, 0.10);
+  }
+  body[data-palette="cyan"] {
+    --cp-accent: #6EE7FF;
+    --cp-accent-glow: rgba(110, 231, 255, 0.4);
+    --cp-accent-glow-strong: rgba(110, 231, 255, 0.85);
+    --cp-bg-glow-top: rgba(110, 231, 255, 0.18);
+    --cp-bg-glow-bot: rgba(42, 140, 255, 0.10);
+  }
+  body[data-palette="plasma"] {
+    --cp-accent: #5BA8FF;
+    --cp-accent-glow: rgba(91, 168, 255, 0.45);
+    --cp-accent-glow-strong: rgba(91, 168, 255, 0.95);
+    --cp-bg-glow-top: rgba(91, 168, 255, 0.24);
+    --cp-bg-glow-bot: rgba(255, 138, 31, 0.10);
+  }
+
+  /* anim keyframes */
+  @keyframes cpFloat { 0%,100% {transform:translateY(0)} 50% {transform:translateY(-12px)} }
+  @keyframes cpDrift { 0%,100% {transform: translate(-50%,-50%) rotate(var(--r,0deg))} 50% {transform: translate(-50%,calc(-50% - 8px)) rotate(var(--r,0deg))} }
+  @keyframes cpPulse { 0%,100% {opacity: .7} 50% {opacity: 1} }
+
+  @media (max-width: 900px) {
+    .cp-nav { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="landing-shell.jsx"></script>
+<script type="text/babel" src="landing-sections.jsx"></script>
+
+<script type="text/babel">
+const { useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "hero": "B",
+  "palette": "plasma",
+  "density": "cozy",
+  "showFloatingProps": true,
+  "headlineAccent": true
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // Apply palette on body
+  useEffect(() => {
+    document.body.setAttribute("data-palette", t.palette);
+  }, [t.palette]);
+
+  // Density helper: scales spacing
+  const densityScale = t.density === "compact" ? 0.72 : t.density === "cozy" ? 0.88 : 1;
+  const d = { s: (n) => Math.round(n * densityScale), scale: densityScale };
+
+  const Hero = t.hero === "B" ? HeroB : t.hero === "C" ? HeroC : HeroA;
+
+  return (
+    <div className="cp-root">
+      <Header/>
+      <Hero d={d}/>
+      {/* For hero C we already show the bot/grupo split, skip the big BotVsGrupo section */}
+      {t.hero !== "C" && <BotVsGrupo d={d}/>}
+      <ComoFunciona d={d}/>
+      <Marcas d={d}/>
+      <FinalCTA d={d}/>
+      <Footer/>
+
+      <TweaksPanel>
+        <TweakSection label="Hero"/>
+        <TweakRadio
+          label="Layout"
+          value={t.hero}
+          options={[
+            { value: "A", label: "Clássico" },
+            { value: "B", label: "Centrado" },
+            { value: "C", label: "Split" },
+          ]}
+          onChange={(v) => setTweak("hero", v)}
+        />
+        <TweakSection label="Visual"/>
+        <TweakSelect
+          label="Paleta"
+          value={t.palette}
+          options={[
+            { value: "blue",   label: "Neon Blue (padrão)" },
+            { value: "cyan",   label: "Aurora Cyan" },
+            { value: "plasma", label: "Plasma — toque laranja" },
+          ]}
+          onChange={(v) => setTweak("palette", v)}
+        />
+        <TweakRadio
+          label="Densidade"
+          value={t.density}
+          options={[
+            { value: "compact", label: "Compacta" },
+            { value: "cozy",    label: "Cozy" },
+            { value: "comfy",   label: "Confortável" },
+          ]}
+          onChange={(v) => setTweak("density", v)}
+        />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
