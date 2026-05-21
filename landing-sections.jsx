@@ -10,7 +10,7 @@ function HeroA({ d }) {
   return (
     <section style={{ position: "relative", padding: `${d.s(64)}px clamp(20px, 5vw, 64px) ${d.s(48)}px`, overflow: "hidden" }}>
       <FloatingProps density={0.8}/>
-      <div style={{ position: "relative", display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: d.s(40), alignItems: "center", maxWidth: 1280, margin: "0 auto" }}>
+      <div className="cp-hero-grid" style={{ position: "relative", display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: d.s(40), alignItems: "center", maxWidth: 1280, margin: "0 auto" }}>
         <div>
           <div style={{ display: "inline-flex", gap: 10, alignItems: "center", padding: "8px 16px", borderRadius: 999, background: "rgba(6,17,48,.6)", boxShadow: "inset 0 0 0 1px var(--cp-stroke-strong)" }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cp-success)", boxShadow: "0 0 8px var(--cp-success)" }}></span>
@@ -29,7 +29,7 @@ function HeroA({ d }) {
             <CapsuleButton size="lg" href="https://chat.whatsapp.com/EQi67PsfvaULLCErmDNAHY">Entrar no grupo</CapsuleButton>
           </div>
         </div>
-        <div style={{ position: "relative", height: d.s(520), display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div className="cp-hero-img" style={{ position: "relative", height: d.s(520), display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Mascot size={540} float={false}/>
         </div>
       </div>
@@ -293,7 +293,7 @@ function Lane({ title, subtitle, color, steps, d }) {
         <h3 style={{ fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: 24, textTransform: "uppercase", color: "#fff", margin: 0, letterSpacing: "-0.01em" }}>{title}</h3>
         <span style={{ fontFamily: "var(--cp-font-body)", fontSize: 13, color: "var(--cp-fg-3)" }}>{subtitle}</span>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: d.s(16) }}>
+      <div className="cp-steps" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: d.s(16) }}>
         {steps.map((s, i) => <StepCard key={i} step={s} color={color}/>)}
       </div>
     </div>

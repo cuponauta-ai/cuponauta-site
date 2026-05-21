@@ -50,6 +50,18 @@
   @media (max-width: 900px) {
     .cp-nav { display: none !important; }
   }
+  @media (max-width: 800px) {
+    .cp-hero-grid { grid-template-columns: 1fr !important; }
+    .cp-hero-img { display: none !important; }
+    .cp-twocol { grid-template-columns: 1fr !important; }
+    .cp-steps { grid-template-columns: 1fr !important; }
+    .cp-brands { grid-template-columns: repeat(3, 1fr) !important; }
+    .cp-footer-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 500px) {
+    .cp-brands { grid-template-columns: repeat(2, 1fr) !important; }
+    .cp-footer-grid { grid-template-columns: 1fr !important; }
+  }
 </style>
 </head>
 <body>
