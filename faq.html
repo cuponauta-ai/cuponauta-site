@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Perguntas Frequentes — Cuponauta</title>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background: var(--cp-bg); color: var(--cp-fg-1); font-family: var(--cp-font-body); scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(42, 140, 255, 0.12), transparent 60%),
+      radial-gradient(circle, rgba(122, 175, 255, 0.05) 1px, transparent 1.2px) 0 0 / 22px 22px,
+      var(--cp-bg);
+    min-height: 100vh;
+  }
+  :root { --cp-accent: #5BA8FF; --cp-accent-glow: rgba(91,168,255,0.45); --cp-accent-glow-strong: rgba(91,168,255,0.95); }
+  ::selection { background: var(--cp-accent); color: #03081a; }
+  .faq-item { border-bottom: 1px solid var(--cp-stroke); }
+  .faq-q { width: 100%; background: none; border: none; cursor: pointer; text-align: left; padding: 22px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .faq-a { overflow: hidden; }
+  @media (max-width: 900px) { .cp-nav { display: none !important; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script type="text/babel" src="landing-shell.jsx"></script>
+<script type="text/babel" src="landing-sections.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+
+const faqs = [
+  {
+    cat: "O Bot",
+    items: [
+      { q: "Como funciona o bot do Cuponauta?", a: "Você envia o link de qualquer produto do Mercado Livre direto no WhatsApp do bot. Ele monitora o preço 24h por dia e te manda uma mensagem assim que o preço cair ou um cupom estiver disponível." },
+      { q: "O bot é gratuito?", a: "Sim, 100% gratuito. Você não paga nada para usar o bot." },
+      { q: "Quais lojas o bot monitora?", a: "Atualmente o bot monitora produtos do Mercado Livre. Mais lojas estão chegando em breve." },
+      { q: "Quantos produtos posso monitorar ao mesmo tempo?", a: "Você pode monitorar vários produtos simultaneamente. Basta enviar os links um por um para o bot." },
+      { q: "Como eu acesso o bot?", a: "É só clicar em "Falar com o bot" em qualquer página do Cuponauta. Você será redirecionado direto para o WhatsApp." },
+    ]
+  },
+  {
+    cat: "O Grupo",
+    items: [
+      { q: "O que é o Grupo do Cuponauta?", a: "É um grupo no WhatsApp onde a gente compartilha as melhores promoções do dia das principais lojas: Mercado Livre, Shopee, iFood, Magalu e Amazon. Você recebe os alertas automaticamente." },
+      { q: "O grupo também é gratuito?", a: "Sim, entrar no grupo é completamente gratuito." },
+      { q: "Com que frequência chegam as promoções?", a: "Ao longo do dia, conforme as melhores ofertas aparecem. A gente filtra antes de mandar para não encher seu chat de promoções ruins." },
+      { q: "Posso participar do grupo e usar o bot ao mesmo tempo?", a: "Claro! Os dois funcionam de forma independente e se complementam muito bem." },
+    ]
+  },
+  {
+    cat: "Geral",
+    items: [
+      { q: "O Cuponauta é seguro?", a: "Sim. Não pedimos nenhum dado pessoal, login ou senha. Você interage apenas pelo WhatsApp, de forma totalmente segura." },
+      { q: "Vocês ganham comissão nas compras?", a: "Sim, usamos links de afiliado. Quando você compra pelo link que a gente indica, recebemos uma pequena comissão da loja — sem nenhum custo adicional para você. É assim que o Cuponauta se sustenta." },
+      { q: "Como entro em contato com o Cuponauta?", a: "Você pode falar com a gente pelo Instagram @cuponautaai ou pela página de contato." },
+    ]
+  }
+];
+
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="faq-item">
+      <button className="faq-q" onClick={() => setOpen(o => !o)}>
+        <span style={{ fontFamily: "var(--cp-font-display)", fontWeight: 800, fontSize: 16, color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", lineHeight: 1.3 }}>{q}</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cp-accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+          style={{ flex: "none", transform: open ? "rotate(45deg)" : "none", transition: "transform 240ms ease" }}>
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+      <div className="faq-a" style={{ maxHeight: open ? 400 : 0, transition: "max-height 300ms ease", overflow: "hidden" }}>
+        <p style={{ fontFamily: "var(--cp-font-body)", fontSize: 15, color: "var(--cp-fg-2)", lineHeight: 1.65, paddingBottom: 20, margin: 0 }}>{a}</p>
+      </div>
+    </div>
+  );
+}
+
+function FaqPage() {
+  return (
+    <div>
+      <Header/>
+      <section style={{ padding: "64px clamp(20px, 5vw, 64px) 96px", maxWidth: 800, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <Eyebrow color="var(--cp-accent)" style={{ marginBottom: 12 }}>Tire suas dúvidas</Eyebrow>
+          <h1 style={{ fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 0.95, letterSpacing: "-0.025em", textTransform: "uppercase", color: "#fff", margin: 0 }}>
+            PERGUNTAS<br/><span style={{ color: "var(--cp-accent)" }}>FREQUENTES</span>
+          </h1>
+        </div>
+        {faqs.map(({ cat, items }) => (
+          <div key={cat} style={{ marginBottom: 48 }}>
+            <div style={{ fontFamily: "var(--cp-font-mono)", fontSize: 11, color: "var(--cp-accent)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 4 }}>{cat}</div>
+            {items.map(({ q, a }) => <FaqItem key={q} q={q} a={a}/>)}
+          </div>
+        ))}
+        <div style={{ marginTop: 64, textAlign: "center", padding: "40px 32px", background: "linear-gradient(180deg, rgba(15,38,96,.6), rgba(6,17,48,.8))", borderRadius: 20, border: "1px solid var(--cp-stroke-strong)" }}>
+          <p style={{ fontFamily: "var(--cp-font-body)", fontSize: 16, color: "var(--cp-fg-2)", margin: "0 0 20px" }}>Não encontrou o que procurava?</p>
+          <PrimaryButton href="https://www.instagram.com/cuponautaai" size="md">Falar no Instagram</PrimaryButton>
+        </div>
+      </section>
+      <Footer/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<FaqPage/>);
+</script>
+</body>
+</html>

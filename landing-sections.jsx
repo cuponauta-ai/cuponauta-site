@@ -403,15 +403,19 @@ function Footer() {
           {[
             ["Produto", ["O Bot", "O Grupo", "Como funciona"]],
             ["Lojas", ["Mercado Livre", "Shopee", "iFood", "Magalu", "Amazon"]],
-            ["Ajuda", ["Perguntas frequentes", "Contato", "Termos de uso", "Política de privacidade"]],
+            ["Ajuda", [["Perguntas frequentes", "faq.html"], ["Contato", "contato.html"], ["Termos de uso", "termos.html"], ["Política de privacidade", "privacidade.html"]]],
           ].map(([title, items]) => (
             <div key={title}>
               <Eyebrow style={{ marginBottom: 14 }}>{title}</Eyebrow>
-              {items.map(it => (
-                <a key={it} href="#" style={{ display: "block", color: "var(--cp-fg-2)", fontFamily: "var(--cp-font-body)", fontSize: 13, marginBottom: 10, textDecoration: "none", transition: "color 160ms" }}
-                  onMouseEnter={e => e.currentTarget.style.color = "var(--cp-accent)"}
-                  onMouseLeave={e => e.currentTarget.style.color = "var(--cp-fg-2)"}>{it}</a>
-              ))}
+              {items.map(it => {
+                const label = Array.isArray(it) ? it[0] : it;
+                const href = Array.isArray(it) ? it[1] : "#";
+                return (
+                  <a key={label} href={href} style={{ display: "block", color: "var(--cp-fg-2)", fontFamily: "var(--cp-font-body)", fontSize: 13, marginBottom: 10, textDecoration: "none", transition: "color 160ms" }}
+                    onMouseEnter={e => e.currentTarget.style.color = "var(--cp-accent)"}
+                    onMouseLeave={e => e.currentTarget.style.color = "var(--cp-fg-2)"}>{label}</a>
+                );
+              })}
             </div>
           ))}
         </div>

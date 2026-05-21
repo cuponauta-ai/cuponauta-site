@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Termos de Uso — Cuponauta</title>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background: var(--cp-bg); color: var(--cp-fg-1); font-family: var(--cp-font-body); scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(42, 140, 255, 0.10), transparent 55%),
+      radial-gradient(circle, rgba(122, 175, 255, 0.04) 1px, transparent 1.2px) 0 0 / 22px 22px,
+      var(--cp-bg);
+    min-height: 100vh;
+  }
+  :root { --cp-accent: #5BA8FF; --cp-accent-glow: rgba(91,168,255,0.45); --cp-accent-glow-strong: rgba(91,168,255,0.95); }
+  ::selection { background: var(--cp-accent); color: #03081a; }
+  .doc-h2 { font-family: var(--cp-font-display); font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; margin: 40px 0 10px; }
+  .doc-p { font-family: var(--cp-font-body); font-size: 15px; color: var(--cp-fg-2); line-height: 1.75; margin: 0 0 14px; }
+  .doc-ul { padding-left: 20px; margin: 0 0 14px; }
+  .doc-ul li { font-family: var(--cp-font-body); font-size: 15px; color: var(--cp-fg-2); line-height: 1.75; margin-bottom: 6px; }
+  @media (max-width: 900px) { .cp-nav { display: none !important; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script type="text/babel" src="landing-shell.jsx"></script>
+<script type="text/babel" src="landing-sections.jsx"></script>
+<script type="text/babel">
+function TermosPage() {
+  return (
+    <div>
+      <Header/>
+      <section style={{ padding: "64px clamp(20px, 5vw, 64px) 96px", maxWidth: 760, margin: "0 auto" }}>
+        <div style={{ marginBottom: 48 }}>
+          <Eyebrow color="var(--cp-accent)" style={{ marginBottom: 12 }}>Legal</Eyebrow>
+          <h1 style={{ fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: "clamp(36px, 5vw, 60px)", lineHeight: 0.95, letterSpacing: "-0.025em", textTransform: "uppercase", color: "#fff", margin: "0 0 16px" }}>
+            TERMOS DE USO
+          </h1>
+          <p style={{ fontFamily: "var(--cp-font-mono)", fontSize: 12, color: "var(--cp-fg-3)", letterSpacing: "0.08em" }}>ÚLTIMA ATUALIZAÇÃO: MAIO DE 2026</p>
+        </div>
+
+        <div style={{ background: "linear-gradient(180deg, rgba(15,38,96,.4), rgba(6,17,48,.6))", borderRadius: 16, padding: "24px 28px", border: "1px solid var(--cp-stroke)", marginBottom: 40 }}>
+          <p className="doc-p" style={{ margin: 0 }}>
+            Ao utilizar os serviços do <strong style={{ color: "#fff" }}>Cuponauta</strong> — incluindo o bot de monitoramento de preços e o grupo de ofertas no WhatsApp — você concorda com os termos descritos neste documento. Leia com atenção antes de usar.
+          </p>
+        </div>
+
+        <h2 className="doc-h2">1. Sobre o Cuponauta</h2>
+        <p className="doc-p">O Cuponauta é uma plataforma brasileira de ofertas e cupons de desconto que opera via WhatsApp. Oferecemos dois serviços principais: um bot de monitoramento de preços e um grupo de ofertas automáticas. Nosso modelo de receita é baseado em links de afiliados das principais plataformas de e-commerce do Brasil.</p>
+
+        <h2 className="doc-h2">2. Uso dos Serviços</h2>
+        <p className="doc-p">Ao utilizar os serviços do Cuponauta, você concorda em:</p>
+        <ul className="doc-ul">
+          <li>Usar os serviços apenas para fins pessoais e não comerciais;</li>
+          <li>Não compartilhar ou redistribuir os conteúdos do grupo sem autorização;</li>
+          <li>Não utilizar os serviços para fins ilegais ou que violem direitos de terceiros;</li>
+          <li>Manter comportamento respeitoso nos canais de comunicação do Cuponauta.</li>
+        </ul>
+
+        <h2 className="doc-h2">3. Links de Afiliados</h2>
+        <p className="doc-p">O Cuponauta utiliza links de afiliado para gerar receita. Quando você realiza uma compra por meio de um link indicado por nós, podemos receber uma comissão da loja parceira. Esse modelo não gera qualquer custo adicional para o consumidor. Os preços e condições exibidos são os mesmos disponíveis nas lojas.</p>
+
+        <h2 className="doc-h2">4. Precisão das Informações</h2>
+        <p className="doc-p">Nos esforçamos para garantir que todas as informações de preços e disponibilidade sejam precisas no momento da divulgação. No entanto, os preços podem mudar a qualquer momento sem aviso prévio pelas lojas parceiras. O Cuponauta não se responsabiliza por alterações de preço ou indisponibilidade de produtos após a divulgação.</p>
+
+        <h2 className="doc-h2">5. Isenção de Responsabilidade</h2>
+        <p className="doc-p">O Cuponauta não é responsável por:</p>
+        <ul className="doc-ul">
+          <li>Qualidade, entrega ou características dos produtos anunciados;</li>
+          <li>Problemas nas transações realizadas nas plataformas parceiras;</li>
+          <li>Indisponibilidade temporária dos serviços por motivos técnicos;</li>
+          <li>Perdas ou danos decorrentes do uso ou da incapacidade de uso dos serviços.</li>
+        </ul>
+
+        <h2 className="doc-h2">6. Propriedade Intelectual</h2>
+        <p className="doc-p">Todo o conteúdo do Cuponauta — incluindo nome, logo, mascote, textos e design — é de propriedade exclusiva do Cuponauta e está protegido por lei. É proibida a reprodução ou uso sem autorização prévia e expressa.</p>
+
+        <h2 className="doc-h2">7. Modificações</h2>
+        <p className="doc-p">Reservamo-nos o direito de alterar estes Termos de Uso a qualquer momento. Alterações significativas serão comunicadas pelos canais oficiais. O uso continuado dos serviços após as alterações implica aceitação dos novos termos.</p>
+
+        <h2 className="doc-h2">8. Contato</h2>
+        <p className="doc-p">Dúvidas sobre estes termos? Entre em contato pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>@cuponautaai</a> ou pela nossa <a href="contato.html" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>página de contato</a>.</p>
+      </section>
+      <Footer/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<TermosPage/>);
+</script>
+</body>
+</html>
