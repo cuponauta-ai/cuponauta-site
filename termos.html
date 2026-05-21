@@ -7,21 +7,15 @@
 <link rel="icon" type="image/png" href="assets/favicon.png"/>
 <link rel="stylesheet" href="colors_and_type.css"/>
 <style>
-  html, body { margin:0; padding:0; background: var(--cp-bg); color: var(--cp-fg-1); font-family: var(--cp-font-body); scroll-behavior: smooth; }
-  body {
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(42, 140, 255, 0.10), transparent 55%),
-      radial-gradient(circle, rgba(122, 175, 255, 0.04) 1px, transparent 1.2px) 0 0 / 22px 22px,
-      var(--cp-bg);
-    min-height: 100vh;
-  }
-  :root { --cp-accent: #5BA8FF; --cp-accent-glow: rgba(91,168,255,0.45); --cp-accent-glow-strong: rgba(91,168,255,0.95); }
-  ::selection { background: var(--cp-accent); color: #03081a; }
-  .doc-h2 { font-family: var(--cp-font-display); font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; margin: 40px 0 10px; }
-  .doc-p { font-family: var(--cp-font-body); font-size: 15px; color: var(--cp-fg-2); line-height: 1.75; margin: 0 0 14px; }
-  .doc-ul { padding-left: 20px; margin: 0 0 14px; }
-  .doc-ul li { font-family: var(--cp-font-body); font-size: 15px; color: var(--cp-fg-2); line-height: 1.75; margin-bottom: 6px; }
-  @media (max-width: 900px) { .cp-nav { display: none !important; } }
+html,body{margin:0;padding:0;background:var(--cp-bg);color:var(--cp-fg-1);font-family:var(--cp-font-body);scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 50% 0%,rgba(42,140,255,.10),transparent 55%),radial-gradient(circle,rgba(122,175,255,.04) 1px,transparent 1.2px) 0 0/22px 22px,var(--cp-bg);min-height:100vh}
+:root{--cp-accent:#5BA8FF;--cp-accent-glow:rgba(91,168,255,.45);--cp-accent-glow-strong:rgba(91,168,255,.95)}
+::selection{background:var(--cp-accent);color:#03081a}
+.h2{font-family:var(--cp-font-display);font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin:40px 0 10px}
+.p{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin:0 0 14px}
+ul{padding-left:20px;margin:0 0 14px}
+li{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin-bottom:6px}
+a{color:var(--cp-accent);text-decoration:none}
 </style>
 </head>
 <body>
@@ -29,70 +23,85 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
-<script type="text/babel" src="landing-shell.jsx"></script>
-<script type="text/babel" src="page-shell.jsx"></script>
 <script type="text/babel">
-function TermosPage() {
+const { useState, useEffect } = React;
+
+function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+  return (
+    <header style={{display:"flex",alignItems:"center",gap:18,padding:"16px clamp(20px,5vw,64px)",background:scrolled?"rgba(3,8,26,.78)":"rgba(3,8,26,.35)",backdropFilter:"blur(14px)",borderBottom:scrolled?"1px solid var(--cp-stroke)":"1px solid transparent",position:"sticky",top:0,zIndex:20,transition:"all 240ms ease"}}>
+      <a href="index.html" style={{display:"inline-flex",textDecoration:"none",lineHeight:0}}>
+        <img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:42,width:"auto",filter:"drop-shadow(0 0 12px var(--cp-accent-glow))"}}/>
+      </a>
+      <div style={{flex:1}}/>
+      <a href="index.html" style={{fontFamily:"var(--cp-font-display)",fontWeight:800,fontSize:13,textTransform:"uppercase",letterSpacing:"0.04em",color:"#03081a",background:"var(--cp-accent)",padding:"10px 18px",borderRadius:999,textDecoration:"none",boxShadow:"0 0 14px var(--cp-accent-glow-strong)"}}>Voltar ao site</a>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{padding:"56px clamp(20px,5vw,64px) 36px",borderTop:"1px solid var(--cp-stroke)",background:"rgba(3,8,26,.7)"}}>
+      <div style={{maxWidth:1240,margin:"0 auto",display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center",gap:16}}>
+        <a href="index.html"><img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:36,filter:"drop-shadow(0 0 8px var(--cp-accent-glow))"}}/></a>
+        <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
+          {[["FAQ","faq.html"],["Contato","contato.html"],["Termos","termos.html"],["Privacidade","privacidade.html"]].map(([l,h])=>(
+            <a key={l} href={h} style={{fontFamily:"var(--cp-font-body)",fontSize:13,color:"var(--cp-fg-2)",textDecoration:"none"}}>{l}</a>
+          ))}
+        </div>
+        <span style={{fontFamily:"var(--cp-font-mono)",fontSize:11,color:"var(--cp-fg-3)"}}>© 2026 CUPONAUTA</span>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
   return (
     <div>
       <Header/>
-      <section style={{ padding: "64px clamp(20px, 5vw, 64px) 96px", maxWidth: 760, margin: "0 auto" }}>
-        <div style={{ marginBottom: 48 }}>
-          <Eyebrow color="var(--cp-accent)" style={{ marginBottom: 12 }}>Legal</Eyebrow>
-          <h1 style={{ fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: "clamp(36px, 5vw, 60px)", lineHeight: 0.95, letterSpacing: "-0.025em", textTransform: "uppercase", color: "#fff", margin: "0 0 16px" }}>
-            TERMOS DE USO
-          </h1>
-          <p style={{ fontFamily: "var(--cp-font-mono)", fontSize: 12, color: "var(--cp-fg-3)", letterSpacing: "0.08em" }}>ÚLTIMA ATUALIZAÇÃO: MAIO DE 2026</p>
+      <section style={{padding:"64px clamp(20px,5vw,64px) 96px",maxWidth:760,margin:"0 auto"}}>
+        <div style={{marginBottom:48}}>
+          <div style={{fontFamily:"var(--cp-font-display)",fontWeight:700,fontSize:12,textTransform:"uppercase",letterSpacing:"0.14em",color:"var(--cp-accent)",marginBottom:12}}>Legal</div>
+          <h1 style={{fontFamily:"var(--cp-font-display)",fontWeight:900,fontSize:"clamp(36px,5vw,60px)",lineHeight:.95,letterSpacing:"-0.025em",textTransform:"uppercase",color:"#fff",margin:"0 0 16px"}}>TERMOS DE USO</h1>
+          <p style={{fontFamily:"var(--cp-font-mono)",fontSize:12,color:"var(--cp-fg-3)",letterSpacing:"0.08em"}}>ÚLTIMA ATUALIZAÇÃO: MAIO DE 2026</p>
         </div>
-
-        <div style={{ background: "linear-gradient(180deg, rgba(15,38,96,.4), rgba(6,17,48,.6))", borderRadius: 16, padding: "24px 28px", border: "1px solid var(--cp-stroke)", marginBottom: 40 }}>
-          <p className="doc-p" style={{ margin: 0 }}>
-            Ao utilizar os serviços do <strong style={{ color: "#fff" }}>Cuponauta</strong> — incluindo o bot de monitoramento de preços e o grupo de ofertas no WhatsApp — você concorda com os termos descritos neste documento. Leia com atenção antes de usar.
-          </p>
+        <div style={{background:"linear-gradient(180deg,rgba(15,38,96,.4),rgba(6,17,48,.6))",borderRadius:16,padding:"24px 28px",border:"1px solid var(--cp-stroke)",marginBottom:40}}>
+          <p className="p" style={{margin:0}}>Ao utilizar os serviços do <strong style={{color:"#fff"}}>Cuponauta</strong> — bot de monitoramento e grupo de ofertas no WhatsApp — você concorda com os termos descritos neste documento.</p>
         </div>
-
-        <h2 className="doc-h2">1. Sobre o Cuponauta</h2>
-        <p className="doc-p">O Cuponauta é uma plataforma brasileira de ofertas e cupons de desconto que opera via WhatsApp. Oferecemos dois serviços principais: um bot de monitoramento de preços e um grupo de ofertas automáticas. Nosso modelo de receita é baseado em links de afiliados das principais plataformas de e-commerce do Brasil.</p>
-
-        <h2 className="doc-h2">2. Uso dos Serviços</h2>
-        <p className="doc-p">Ao utilizar os serviços do Cuponauta, você concorda em:</p>
-        <ul className="doc-ul">
+        <div className="h2">1. Sobre o Cuponauta</div>
+        <p className="p">O Cuponauta é uma plataforma brasileira de ofertas e cupons que opera via WhatsApp. Nosso modelo de receita é baseado em links de afiliados das principais plataformas de e-commerce do Brasil.</p>
+        <div className="h2">2. Uso dos Serviços</div>
+        <p className="p">Ao utilizar os serviços do Cuponauta, você concorda em:</p>
+        <ul>
           <li>Usar os serviços apenas para fins pessoais e não comerciais;</li>
-          <li>Não compartilhar ou redistribuir os conteúdos do grupo sem autorização;</li>
+          <li>Não compartilhar ou redistribuir conteúdos do grupo sem autorização;</li>
           <li>Não utilizar os serviços para fins ilegais ou que violem direitos de terceiros;</li>
-          <li>Manter comportamento respeitoso nos canais de comunicação do Cuponauta.</li>
+          <li>Manter comportamento respeitoso nos canais de comunicação.</li>
         </ul>
-
-        <h2 className="doc-h2">3. Links de Afiliados</h2>
-        <p className="doc-p">O Cuponauta utiliza links de afiliado para gerar receita. Quando você realiza uma compra por meio de um link indicado por nós, podemos receber uma comissão da loja parceira. Esse modelo não gera qualquer custo adicional para o consumidor. Os preços e condições exibidos são os mesmos disponíveis nas lojas.</p>
-
-        <h2 className="doc-h2">4. Precisão das Informações</h2>
-        <p className="doc-p">Nos esforçamos para garantir que todas as informações de preços e disponibilidade sejam precisas no momento da divulgação. No entanto, os preços podem mudar a qualquer momento sem aviso prévio pelas lojas parceiras. O Cuponauta não se responsabiliza por alterações de preço ou indisponibilidade de produtos após a divulgação.</p>
-
-        <h2 className="doc-h2">5. Isenção de Responsabilidade</h2>
-        <p className="doc-p">O Cuponauta não é responsável por:</p>
-        <ul className="doc-ul">
-          <li>Qualidade, entrega ou características dos produtos anunciados;</li>
-          <li>Problemas nas transações realizadas nas plataformas parceiras;</li>
-          <li>Indisponibilidade temporária dos serviços por motivos técnicos;</li>
-          <li>Perdas ou danos decorrentes do uso ou da incapacidade de uso dos serviços.</li>
-        </ul>
-
-        <h2 className="doc-h2">6. Propriedade Intelectual</h2>
-        <p className="doc-p">Todo o conteúdo do Cuponauta — incluindo nome, logo, mascote, textos e design — é de propriedade exclusiva do Cuponauta e está protegido por lei. É proibida a reprodução ou uso sem autorização prévia e expressa.</p>
-
-        <h2 className="doc-h2">7. Modificações</h2>
-        <p className="doc-p">Reservamo-nos o direito de alterar estes Termos de Uso a qualquer momento. Alterações significativas serão comunicadas pelos canais oficiais. O uso continuado dos serviços após as alterações implica aceitação dos novos termos.</p>
-
-        <h2 className="doc-h2">8. Contato</h2>
-        <p className="doc-p">Dúvidas sobre estes termos? Entre em contato pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>@cuponautaai</a> ou pela nossa <a href="contato.html" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>página de contato</a>.</p>
+        <div className="h2">3. Links de Afiliados</div>
+        <p className="p">O Cuponauta utiliza links de afiliado para gerar receita. Quando você realiza uma compra pelo link indicado, podemos receber uma comissão da loja parceira — sem nenhum custo adicional para você.</p>
+        <div className="h2">4. Precisão das Informações</div>
+        <p className="p">Nos esforçamos para garantir que preços e disponibilidade sejam precisos no momento da divulgação. No entanto, os preços podem mudar a qualquer momento pelas lojas parceiras. O Cuponauta não se responsabiliza por alterações após a divulgação.</p>
+        <div className="h2">5. Isenção de Responsabilidade</div>
+        <p className="p">O Cuponauta não é responsável por qualidade ou entrega dos produtos anunciados, problemas nas transações nas plataformas parceiras, indisponibilidade temporária dos serviços, nem por perdas decorrentes do uso dos serviços.</p>
+        <div className="h2">6. Propriedade Intelectual</div>
+        <p className="p">Todo o conteúdo do Cuponauta — nome, logo, mascote, textos e design — é de propriedade exclusiva do Cuponauta. É proibida a reprodução sem autorização prévia.</p>
+        <div className="h2">7. Modificações</div>
+        <p className="p">Reservamo-nos o direito de alterar estes Termos a qualquer momento. O uso continuado dos serviços implica aceitação dos novos termos.</p>
+        <div className="h2">8. Contato</div>
+        <p className="p">Dúvidas? Fale com a gente pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer">@cuponautaai</a> ou pela nossa <a href="contato.html">página de contato</a>.</p>
       </section>
       <Footer/>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<TermosPage/>);
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
 </script>
 </body>
 </html>

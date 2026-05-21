@@ -7,21 +7,15 @@
 <link rel="icon" type="image/png" href="assets/favicon.png"/>
 <link rel="stylesheet" href="colors_and_type.css"/>
 <style>
-  html, body { margin:0; padding:0; background: var(--cp-bg); color: var(--cp-fg-1); font-family: var(--cp-font-body); scroll-behavior: smooth; }
-  body {
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(42, 140, 255, 0.10), transparent 55%),
-      radial-gradient(circle, rgba(122, 175, 255, 0.04) 1px, transparent 1.2px) 0 0 / 22px 22px,
-      var(--cp-bg);
-    min-height: 100vh;
-  }
-  :root { --cp-accent: #5BA8FF; --cp-accent-glow: rgba(91,168,255,0.45); --cp-accent-glow-strong: rgba(91,168,255,0.95); }
-  ::selection { background: var(--cp-accent); color: #03081a; }
-  .doc-h2 { font-family: var(--cp-font-display); font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; margin: 40px 0 10px; }
-  .doc-p { font-family: var(--cp-font-body); font-size: 15px; color: var(--cp-fg-2); line-height: 1.75; margin: 0 0 14px; }
-  .doc-ul { padding-left: 20px; margin: 0 0 14px; }
-  .doc-ul li { font-family: var(--cp-font-body); font-size: 15px; color: var(--cp-fg-2); line-height: 1.75; margin-bottom: 6px; }
-  @media (max-width: 900px) { .cp-nav { display: none !important; } }
+html,body{margin:0;padding:0;background:var(--cp-bg);color:var(--cp-fg-1);font-family:var(--cp-font-body);scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 50% 0%,rgba(42,140,255,.10),transparent 55%),radial-gradient(circle,rgba(122,175,255,.04) 1px,transparent 1.2px) 0 0/22px 22px,var(--cp-bg);min-height:100vh}
+:root{--cp-accent:#5BA8FF;--cp-accent-glow:rgba(91,168,255,.45);--cp-accent-glow-strong:rgba(91,168,255,.95)}
+::selection{background:var(--cp-accent);color:#03081a}
+.h2{font-family:var(--cp-font-display);font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin:40px 0 10px}
+.p{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin:0 0 14px}
+ul{padding-left:20px;margin:0 0 14px}
+li{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin-bottom:6px}
+a{color:var(--cp-accent);text-decoration:none}
 </style>
 </head>
 <body>
@@ -29,78 +23,100 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
-<script type="text/babel" src="landing-shell.jsx"></script>
-<script type="text/babel" src="page-shell.jsx"></script>
 <script type="text/babel">
-function PrivacidadePage() {
+const { useState, useEffect } = React;
+
+function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+  return (
+    <header style={{display:"flex",alignItems:"center",gap:18,padding:"16px clamp(20px,5vw,64px)",background:scrolled?"rgba(3,8,26,.78)":"rgba(3,8,26,.35)",backdropFilter:"blur(14px)",borderBottom:scrolled?"1px solid var(--cp-stroke)":"1px solid transparent",position:"sticky",top:0,zIndex:20,transition:"all 240ms ease"}}>
+      <a href="index.html" style={{display:"inline-flex",textDecoration:"none",lineHeight:0}}>
+        <img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:42,width:"auto",filter:"drop-shadow(0 0 12px var(--cp-accent-glow))"}}/>
+      </a>
+      <div style={{flex:1}}/>
+      <a href="index.html" style={{fontFamily:"var(--cp-font-display)",fontWeight:800,fontSize:13,textTransform:"uppercase",letterSpacing:"0.04em",color:"#03081a",background:"var(--cp-accent)",padding:"10px 18px",borderRadius:999,textDecoration:"none",boxShadow:"0 0 14px var(--cp-accent-glow-strong)"}}>Voltar ao site</a>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{padding:"56px clamp(20px,5vw,64px) 36px",borderTop:"1px solid var(--cp-stroke)",background:"rgba(3,8,26,.7)"}}>
+      <div style={{maxWidth:1240,margin:"0 auto",display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center",gap:16}}>
+        <a href="index.html"><img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:36,filter:"drop-shadow(0 0 8px var(--cp-accent-glow))"}}/></a>
+        <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
+          {[["FAQ","faq.html"],["Contato","contato.html"],["Termos","termos.html"],["Privacidade","privacidade.html"]].map(([l,h])=>(
+            <a key={l} href={h} style={{fontFamily:"var(--cp-font-body)",fontSize:13,color:"var(--cp-fg-2)",textDecoration:"none"}}>{l}</a>
+          ))}
+        </div>
+        <span style={{fontFamily:"var(--cp-font-mono)",fontSize:11,color:"var(--cp-fg-3)"}}>© 2026 CUPONAUTA</span>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
   return (
     <div>
       <Header/>
-      <section style={{ padding: "64px clamp(20px, 5vw, 64px) 96px", maxWidth: 760, margin: "0 auto" }}>
-        <div style={{ marginBottom: 48 }}>
-          <Eyebrow color="var(--cp-accent)" style={{ marginBottom: 12 }}>Legal</Eyebrow>
-          <h1 style={{ fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: "clamp(36px, 5vw, 60px)", lineHeight: 0.95, letterSpacing: "-0.025em", textTransform: "uppercase", color: "#fff", margin: "0 0 16px" }}>
-            POLÍTICA DE<br/><span style={{ color: "var(--cp-accent)" }}>PRIVACIDADE</span>
+      <section style={{padding:"64px clamp(20px,5vw,64px) 96px",maxWidth:760,margin:"0 auto"}}>
+        <div style={{marginBottom:48}}>
+          <div style={{fontFamily:"var(--cp-font-display)",fontWeight:700,fontSize:12,textTransform:"uppercase",letterSpacing:"0.14em",color:"var(--cp-accent)",marginBottom:12}}>Legal</div>
+          <h1 style={{fontFamily:"var(--cp-font-display)",fontWeight:900,fontSize:"clamp(36px,5vw,60px)",lineHeight:.95,letterSpacing:"-0.025em",textTransform:"uppercase",color:"#fff",margin:"0 0 16px"}}>
+            POLÍTICA DE<br/><span style={{color:"var(--cp-accent)"}}>PRIVACIDADE</span>
           </h1>
-          <p style={{ fontFamily: "var(--cp-font-mono)", fontSize: 12, color: "var(--cp-fg-3)", letterSpacing: "0.08em" }}>ÚLTIMA ATUALIZAÇÃO: MAIO DE 2026</p>
+          <p style={{fontFamily:"var(--cp-font-mono)",fontSize:12,color:"var(--cp-fg-3)",letterSpacing:"0.08em"}}>ÚLTIMA ATUALIZAÇÃO: MAIO DE 2026</p>
         </div>
-
-        <div style={{ background: "linear-gradient(180deg, rgba(15,38,96,.4), rgba(6,17,48,.6))", borderRadius: 16, padding: "24px 28px", border: "1px solid var(--cp-stroke)", marginBottom: 40 }}>
-          <p className="doc-p" style={{ margin: 0 }}>
-            A privacidade dos nossos usuários é levada a sério pelo <strong style={{ color: "#fff" }}>Cuponauta</strong>. Este documento explica de forma clara quais dados coletamos, como os usamos e quais são seus direitos. Em caso de dúvidas, fale com a gente pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>@cuponautaai</a>.
-          </p>
+        <div style={{background:"linear-gradient(180deg,rgba(15,38,96,.4),rgba(6,17,48,.6))",borderRadius:16,padding:"24px 28px",border:"1px solid var(--cp-stroke)",marginBottom:40}}>
+          <p className="p" style={{margin:0}}>A privacidade dos nossos usuários é levada a sério pelo <strong style={{color:"#fff"}}>Cuponauta</strong>. Este documento explica quais dados coletamos, como os usamos e quais são seus direitos.</p>
         </div>
-
-        <h2 className="doc-h2">1. Quais dados coletamos</h2>
-        <p className="doc-p">O Cuponauta opera exclusivamente via WhatsApp e não possui cadastro próprio. Os dados que podemos receber são:</p>
-        <ul className="doc-ul">
-          <li><strong style={{ color: "#fff" }}>Número de telefone:</strong> fornecido automaticamente pelo WhatsApp quando você inicia uma conversa com o bot ou entra no grupo;</li>
-          <li><strong style={{ color: "#fff" }}>Links de produtos:</strong> enviados por você ao bot para monitoramento de preços;</li>
-          <li><strong style={{ color: "#fff" }}>Dados de navegação no site:</strong> informações anônimas de acesso (páginas visitadas, tempo de navegação) coletadas por ferramentas de analytics.</li>
+        <div className="h2">1. Quais dados coletamos</div>
+        <p className="p">O Cuponauta opera via WhatsApp e não possui cadastro próprio. Os dados que podemos receber são:</p>
+        <ul>
+          <li><strong style={{color:"#fff"}}>Número de telefone:</strong> fornecido automaticamente pelo WhatsApp ao iniciar conversa com o bot ou entrar no grupo;</li>
+          <li><strong style={{color:"#fff"}}>Links de produtos:</strong> enviados por você ao bot para monitoramento;</li>
+          <li><strong style={{color:"#fff"}}>Dados de navegação:</strong> informações anônimas de acesso ao site coletadas por analytics.</li>
         </ul>
-        <p className="doc-p">Não coletamos nome completo, CPF, endereço, dados de cartão de crédito ou qualquer outro dado pessoal sensível.</p>
-
-        <h2 className="doc-h2">2. Como usamos os dados</h2>
-        <p className="doc-p">Os dados coletados são usados exclusivamente para:</p>
-        <ul className="doc-ul">
-          <li>Operar o bot de monitoramento de preços e enviar alertas personalizados;</li>
+        <p className="p">Não coletamos nome completo, CPF, endereço, dados de cartão ou qualquer dado pessoal sensível.</p>
+        <div className="h2">2. Como usamos os dados</div>
+        <p className="p">Os dados são usados exclusivamente para:</p>
+        <ul>
+          <li>Operar o bot e enviar alertas de preço personalizados;</li>
           <li>Enviar ofertas e promoções pelo grupo de WhatsApp;</li>
           <li>Melhorar a experiência e os serviços do Cuponauta;</li>
-          <li>Entender o comportamento de navegação no site de forma agregada e anônima.</li>
+          <li>Entender o comportamento de navegação de forma agregada e anônima.</li>
         </ul>
-        <p className="doc-p">Nunca vendemos, alugamos ou compartilhamos seus dados com terceiros para fins comerciais.</p>
-
-        <h2 className="doc-h2">3. Links de afiliados e lojas parceiras</h2>
-        <p className="doc-p">Os links que compartilhamos são links de afiliado das lojas parceiras (Mercado Livre, Shopee, iFood, Magalu e Amazon). Ao clicar nesses links, você será redirecionado para os sites das respectivas lojas, que possuem suas próprias políticas de privacidade. O Cuponauta não tem acesso a dados de compras realizadas nas plataformas parceiras.</p>
-
-        <h2 className="doc-h2">4. Armazenamento e segurança</h2>
-        <p className="doc-p">Os dados são armazenados em servidores seguros. Adotamos medidas técnicas adequadas para proteger as informações contra acesso não autorizado, perda ou destruição. Os dados de monitoramento do bot são mantidos enquanto o serviço estiver ativo para o usuário.</p>
-
-        <h2 className="doc-h2">5. Seus direitos (LGPD)</h2>
-        <p className="doc-p">Em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem direito a:</p>
-        <ul className="doc-ul">
+        <p className="p">Nunca vendemos, alugamos ou compartilhamos seus dados com terceiros para fins comerciais.</p>
+        <div className="h2">3. Links de afiliados e lojas parceiras</div>
+        <p className="p">Os links que compartilhamos são de afiliado das lojas parceiras. Ao clicar, você é redirecionado para os sites das lojas, que possuem suas próprias políticas de privacidade. O Cuponauta não acessa dados de compras realizadas nessas plataformas.</p>
+        <div className="h2">4. Armazenamento e segurança</div>
+        <p className="p">Os dados são armazenados em servidores seguros com medidas técnicas adequadas para proteger contra acesso não autorizado. Os dados de monitoramento do bot são mantidos enquanto o serviço estiver ativo para o usuário.</p>
+        <div className="h2">5. Seus direitos (LGPD)</div>
+        <p className="p">Em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem direito a:</p>
+        <ul>
           <li>Saber quais dados seus estão armazenados;</li>
           <li>Solicitar a correção de dados incorretos;</li>
           <li>Solicitar a exclusão dos seus dados;</li>
-          <li>Revogar seu consentimento a qualquer momento, saindo do grupo ou encerrando a conversa com o bot.</li>
+          <li>Revogar o consentimento a qualquer momento, saindo do grupo ou encerrando a conversa com o bot.</li>
         </ul>
-        <p className="doc-p">Para exercer qualquer um desses direitos, entre em contato pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>@cuponautaai</a>.</p>
-
-        <h2 className="doc-h2">6. Cookies e analytics</h2>
-        <p className="doc-p">Nosso site pode utilizar ferramentas de analytics para entender o comportamento de navegação de forma anônima e agregada. Não utilizamos cookies para rastreamento individual ou publicidade direcionada.</p>
-
-        <h2 className="doc-h2">7. Alterações nesta política</h2>
-        <p className="doc-p">Esta política pode ser atualizada periodicamente. A data da última revisão está indicada no topo desta página. Recomendamos que você a consulte regularmente.</p>
-
-        <h2 className="doc-h2">8. Contato</h2>
-        <p className="doc-p">Dúvidas sobre privacidade? Fale com a gente pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>@cuponautaai</a> ou pela nossa <a href="contato.html" style={{ color: "var(--cp-accent)", textDecoration: "none" }}>página de contato</a>.</p>
+        <div className="h2">6. Cookies e analytics</div>
+        <p className="p">Nosso site pode utilizar analytics para entender o comportamento de navegação de forma anônima e agregada. Não utilizamos cookies para rastreamento individual ou publicidade direcionada.</p>
+        <div className="h2">7. Alterações nesta política</div>
+        <p className="p">Esta política pode ser atualizada periodicamente. A data da última revisão está indicada no topo desta página.</p>
+        <div className="h2">8. Contato</div>
+        <p className="p">Dúvidas sobre privacidade? Fale pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer">@cuponautaai</a> ou pela nossa <a href="contato.html">página de contato</a>.</p>
       </section>
       <Footer/>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<PrivacidadePage/>);
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
 </script>
 </body>
 </html>
