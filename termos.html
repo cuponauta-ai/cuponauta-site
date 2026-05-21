@@ -11,10 +11,10 @@ html,body{margin:0;padding:0;background:var(--cp-bg);color:var(--cp-fg-1);font-f
 body{background:radial-gradient(ellipse at 50% 0%,rgba(42,140,255,.10),transparent 55%),radial-gradient(circle,rgba(122,175,255,.04) 1px,transparent 1.2px) 0 0/22px 22px,var(--cp-bg);min-height:100vh}
 :root{--cp-accent:#5BA8FF;--cp-accent-glow:rgba(91,168,255,.45);--cp-accent-glow-strong:rgba(91,168,255,.95)}
 ::selection{background:var(--cp-accent);color:#03081a}
-.h2{font-family:var(--cp-font-display);font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin:40px 0 10px}
-.p{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin:0 0 14px}
+h2{font-family:var(--cp-font-display);font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin:40px 0 10px}
+p,li{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin:0 0 14px}
 ul{padding-left:20px;margin:0 0 14px}
-li{font-family:var(--cp-font-body);font-size:15px;color:var(--cp-fg-2);line-height:1.75;margin-bottom:6px}
+li{margin-bottom:6px}
 a{color:var(--cp-accent);text-decoration:none}
 </style>
 </head>
@@ -30,31 +30,30 @@ function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
   return (
-    <header style={{display:"flex",alignItems:"center",gap:18,padding:"16px clamp(20px,5vw,64px)",background:scrolled?"rgba(3,8,26,.78)":"rgba(3,8,26,.35)",backdropFilter:"blur(14px)",borderBottom:scrolled?"1px solid var(--cp-stroke)":"1px solid transparent",position:"sticky",top:0,zIndex:20,transition:"all 240ms ease"}}>
-      <a href="index.html" style={{display:"inline-flex",textDecoration:"none",lineHeight:0}}>
-        <img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:42,width:"auto",filter:"drop-shadow(0 0 12px var(--cp-accent-glow))"}}/>
+    <header style={{display:'flex',alignItems:'center',gap:18,padding:'16px clamp(20px,5vw,64px)',background:scrolled?'rgba(3,8,26,.78)':'rgba(3,8,26,.35)',backdropFilter:'blur(14px)',borderBottom:scrolled?'1px solid var(--cp-stroke)':'1px solid transparent',position:'sticky',top:0,zIndex:20,transition:'all 240ms ease'}}>
+      <a href='index.html' style={{display:'inline-flex',textDecoration:'none',lineHeight:0}}>
+        <img src='assets/logo-cuponauta.png' alt='Cuponauta' style={{height:42,width:'auto',filter:'drop-shadow(0 0 12px var(--cp-accent-glow))'}}/>
       </a>
       <div style={{flex:1}}/>
-      <a href="index.html" style={{fontFamily:"var(--cp-font-display)",fontWeight:800,fontSize:13,textTransform:"uppercase",letterSpacing:"0.04em",color:"#03081a",background:"var(--cp-accent)",padding:"10px 18px",borderRadius:999,textDecoration:"none",boxShadow:"0 0 14px var(--cp-accent-glow-strong)"}}>Voltar ao site</a>
+      <a href='index.html' style={{fontFamily:'var(--cp-font-display)',fontWeight:800,fontSize:13,textTransform:'uppercase',letterSpacing:'0.04em',color:'#03081a',background:'var(--cp-accent)',padding:'10px 18px',borderRadius:999,textDecoration:'none',boxShadow:'0 0 14px var(--cp-accent-glow-strong)'}}>Voltar ao site</a>
     </header>
   );
 }
 
 function Footer() {
+  const links = [['FAQ','faq.html'],['Contato','contato.html'],['Termos','termos.html'],['Privacidade','privacidade.html']];
   return (
-    <footer style={{padding:"56px clamp(20px,5vw,64px) 36px",borderTop:"1px solid var(--cp-stroke)",background:"rgba(3,8,26,.7)"}}>
-      <div style={{maxWidth:1240,margin:"0 auto",display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center",gap:16}}>
-        <a href="index.html"><img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:36,filter:"drop-shadow(0 0 8px var(--cp-accent-glow))"}}/></a>
-        <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
-          {[["FAQ","faq.html"],["Contato","contato.html"],["Termos","termos.html"],["Privacidade","privacidade.html"]].map(([l,h])=>(
-            <a key={l} href={h} style={{fontFamily:"var(--cp-font-body)",fontSize:13,color:"var(--cp-fg-2)",textDecoration:"none"}}>{l}</a>
-          ))}
+    <footer style={{padding:'48px clamp(20px,5vw,64px) 32px',borderTop:'1px solid var(--cp-stroke)',background:'rgba(3,8,26,.7)'}}>
+      <div style={{maxWidth:1240,margin:'0 auto',display:'flex',flexWrap:'wrap',justifyContent:'space-between',alignItems:'center',gap:20}}>
+        <a href='index.html'><img src='assets/logo-cuponauta.png' alt='Cuponauta' style={{height:36,filter:'drop-shadow(0 0 8px var(--cp-accent-glow))'}}/></a>
+        <div style={{display:'flex',gap:24,flexWrap:'wrap'}}>
+          {links.map(([l,h]) => <a key={l} href={h} style={{fontFamily:'var(--cp-font-body)',fontSize:13,color:'var(--cp-fg-2)',textDecoration:'none'}}>{l}</a>)}
         </div>
-        <span style={{fontFamily:"var(--cp-font-mono)",fontSize:11,color:"var(--cp-fg-3)"}}>© 2026 CUPONAUTA</span>
+        <span style={{fontFamily:'var(--cp-font-mono)',fontSize:11,color:'var(--cp-fg-3)'}}>© 2026 CUPONAUTA</span>
       </div>
     </footer>
   );
@@ -64,44 +63,57 @@ function App() {
   return (
     <div>
       <Header/>
-      <section style={{padding:"64px clamp(20px,5vw,64px) 96px",maxWidth:760,margin:"0 auto"}}>
+      <section style={{padding:'64px clamp(20px,5vw,64px) 96px',maxWidth:760,margin:'0 auto'}}>
         <div style={{marginBottom:48}}>
-          <div style={{fontFamily:"var(--cp-font-display)",fontWeight:700,fontSize:12,textTransform:"uppercase",letterSpacing:"0.14em",color:"var(--cp-accent)",marginBottom:12}}>Legal</div>
-          <h1 style={{fontFamily:"var(--cp-font-display)",fontWeight:900,fontSize:"clamp(36px,5vw,60px)",lineHeight:.95,letterSpacing:"-0.025em",textTransform:"uppercase",color:"#fff",margin:"0 0 16px"}}>TERMOS DE USO</h1>
-          <p style={{fontFamily:"var(--cp-font-mono)",fontSize:12,color:"var(--cp-fg-3)",letterSpacing:"0.08em"}}>ÚLTIMA ATUALIZAÇÃO: MAIO DE 2026</p>
+          <div style={{fontFamily:'var(--cp-font-display)',fontWeight:700,fontSize:12,textTransform:'uppercase',letterSpacing:'0.14em',color:'var(--cp-accent)',marginBottom:12}}>Legal</div>
+          <h1 style={{fontFamily:'var(--cp-font-display)',fontWeight:900,fontSize:'clamp(36px,5vw,60px)',lineHeight:.95,letterSpacing:'-0.025em',textTransform:'uppercase',color:'#fff',margin:'0 0 16px'}}>TERMOS DE USO</h1>
+          <p style={{fontFamily:'var(--cp-font-mono)',fontSize:12,color:'var(--cp-fg-3)',letterSpacing:'0.08em',margin:0}}>ULTIMA ATUALIZACAO: MAIO DE 2026</p>
         </div>
-        <div style={{background:"linear-gradient(180deg,rgba(15,38,96,.4),rgba(6,17,48,.6))",borderRadius:16,padding:"24px 28px",border:"1px solid var(--cp-stroke)",marginBottom:40}}>
-          <p className="p" style={{margin:0}}>Ao utilizar os serviços do <strong style={{color:"#fff"}}>Cuponauta</strong> — bot de monitoramento e grupo de ofertas no WhatsApp — você concorda com os termos descritos neste documento.</p>
+
+        <div style={{background:'linear-gradient(180deg,rgba(15,38,96,.4),rgba(6,17,48,.6))',borderRadius:16,padding:'24px 28px',border:'1px solid rgba(91,168,255,.25)',marginBottom:40}}>
+          <p style={{margin:0}}>Ao usar os servicos do <strong style={{color:'#fff'}}>Cuponauta</strong> (bot de monitoramento e grupo de ofertas no WhatsApp), voce concorda com os termos abaixo.</p>
         </div>
-        <div className="h2">1. Sobre o Cuponauta</div>
-        <p className="p">O Cuponauta é uma plataforma brasileira de ofertas e cupons que opera via WhatsApp. Nosso modelo de receita é baseado em links de afiliados das principais plataformas de e-commerce do Brasil.</p>
-        <div className="h2">2. Uso dos Serviços</div>
-        <p className="p">Ao utilizar os serviços do Cuponauta, você concorda em:</p>
+
+        <h2>1. Sobre o Cuponauta</h2>
+        <p>O Cuponauta e uma plataforma brasileira de ofertas e cupons que funciona via WhatsApp. A receita vem de links de afiliados das principais lojas de e-commerce do Brasil.</p>
+
+        <h2>2. Como voce pode usar</h2>
+        <p>Ao usar o Cuponauta, voce concorda em:</p>
         <ul>
-          <li>Usar os serviços apenas para fins pessoais e não comerciais;</li>
-          <li>Não compartilhar ou redistribuir conteúdos do grupo sem autorização;</li>
-          <li>Não utilizar os serviços para fins ilegais ou que violem direitos de terceiros;</li>
-          <li>Manter comportamento respeitoso nos canais de comunicação.</li>
+          <li>Usar os servicos so para fins pessoais, nao comerciais</li>
+          <li>Nao redistribuir conteudos do grupo sem autorizacao</li>
+          <li>Nao usar os servicos para fins ilegais</li>
+          <li>Manter um comportamento respeitoso nos canais do Cuponauta</li>
         </ul>
-        <div className="h2">3. Links de Afiliados</div>
-        <p className="p">O Cuponauta utiliza links de afiliado para gerar receita. Quando você realiza uma compra pelo link indicado, podemos receber uma comissão da loja parceira — sem nenhum custo adicional para você.</p>
-        <div className="h2">4. Precisão das Informações</div>
-        <p className="p">Nos esforçamos para garantir que preços e disponibilidade sejam precisos no momento da divulgação. No entanto, os preços podem mudar a qualquer momento pelas lojas parceiras. O Cuponauta não se responsabiliza por alterações após a divulgação.</p>
-        <div className="h2">5. Isenção de Responsabilidade</div>
-        <p className="p">O Cuponauta não é responsável por qualidade ou entrega dos produtos anunciados, problemas nas transações nas plataformas parceiras, indisponibilidade temporária dos serviços, nem por perdas decorrentes do uso dos serviços.</p>
-        <div className="h2">6. Propriedade Intelectual</div>
-        <p className="p">Todo o conteúdo do Cuponauta — nome, logo, mascote, textos e design — é de propriedade exclusiva do Cuponauta. É proibida a reprodução sem autorização prévia.</p>
-        <div className="h2">7. Modificações</div>
-        <p className="p">Reservamo-nos o direito de alterar estes Termos a qualquer momento. O uso continuado dos serviços implica aceitação dos novos termos.</p>
-        <div className="h2">8. Contato</div>
-        <p className="p">Dúvidas? Fale com a gente pelo Instagram <a href="https://www.instagram.com/cuponautaai" target="_blank" rel="noopener noreferrer">@cuponautaai</a> ou pela nossa <a href="contato.html">página de contato</a>.</p>
+
+        <h2>3. Links de afiliados</h2>
+        <p>Quando voce compra por um link que a gente indica, podemos receber uma comissao da loja. Isso nao gera nenhum custo a mais para voce. Os precos sao os mesmos das lojas.</p>
+
+        <h2>4. Precos e disponibilidade</h2>
+        <p>Os precos podem mudar a qualquer hora pelas lojas parceiras, sem aviso previo. O Cuponauta nao se responsabiliza por alteracoes depois da divulgacao.</p>
+
+        <h2>5. O que nao e nossa responsabilidade</h2>
+        <ul>
+          <li>Qualidade, entrega ou caracteristicas dos produtos anunciados</li>
+          <li>Problemas nas transacoes feitas nas plataformas parceiras</li>
+          <li>Indisponibilidade temporaria dos servicos por motivos tecnicos</li>
+        </ul>
+
+        <h2>6. Propriedade intelectual</h2>
+        <p>Nome, logo, mascote, textos e design do Cuponauta sao de nossa propriedade. Reproducao sem autorizacao e proibida.</p>
+
+        <h2>7. Mudancas nestes termos</h2>
+        <p>Podemos atualizar estes termos quando precisar. O uso continuado dos servicos significa que voce aceitou as mudancas.</p>
+
+        <h2>8. Contato</h2>
+        <p>Duvidas? Fale com a gente pelo Instagram <a href='https://www.instagram.com/cuponautaai' target='_blank' rel='noopener noreferrer'>@cuponautaai</a> ou pela <a href='contato.html'>pagina de contato</a>.</p>
       </section>
       <Footer/>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 </body>
 </html>

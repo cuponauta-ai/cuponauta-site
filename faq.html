@@ -11,7 +11,6 @@ html,body{margin:0;padding:0;background:var(--cp-bg);color:var(--cp-fg-1);font-f
 body{background:radial-gradient(ellipse at 50% 0%,rgba(42,140,255,.12),transparent 60%),radial-gradient(circle,rgba(122,175,255,.05) 1px,transparent 1.2px) 0 0/22px 22px,var(--cp-bg);min-height:100vh}
 :root{--cp-accent:#5BA8FF;--cp-accent-glow:rgba(91,168,255,.45);--cp-accent-glow-strong:rgba(91,168,255,.95)}
 ::selection{background:var(--cp-accent);color:#03081a}
-@media(max-width:900px){.cp-nav{display:none!important}}
 </style>
 </head>
 <body>
@@ -22,20 +21,41 @@ body{background:radial-gradient(ellipse at 50% 0%,rgba(42,140,255,.12),transpare
 <script type="text/babel">
 const { useState, useEffect } = React;
 
+const faqs = [
+  { cat: 'O Bot', items: [
+    { q: 'Como funciona o bot do Cuponauta?', a: 'Manda o link de qualquer produto do Mercado Livre no WhatsApp do bot. Ele fica de olho no preco e te avisa quando cair.' },
+    { q: 'O bot e gratuito?', a: 'Sim, 100% gratuito. Voce nao paga nada.' },
+    { q: 'Quais lojas o bot monitora?', a: 'Por enquanto, so o Mercado Livre. Mais lojas chegam em breve.' },
+    { q: 'Quantos produtos posso monitorar?', a: 'Varios ao mesmo tempo. Basta mandar os links um por um para o bot.' },
+    { q: 'Como acesso o bot?', a: 'Clique no botao Falar com o bot em qualquer pagina do Cuponauta. Vai abrir direto no WhatsApp.' },
+  ]},
+  { cat: 'O Grupo', items: [
+    { q: 'O que e o Grupo do Cuponauta?', a: 'Um grupo no WhatsApp onde a gente manda as melhores promos do dia: Mercado Livre, Shopee, iFood, Magalu e Amazon.' },
+    { q: 'O grupo tambem e gratuito?', a: 'Sim, entrar no grupo e gratuito.' },
+    { q: 'Com que frequencia chegam as promos?', a: 'Ao longo do dia, so quando vale a pena. A gente filtra antes de mandar.' },
+    { q: 'Posso usar o bot e o grupo ao mesmo tempo?', a: 'Claro, os dois funcionam de forma independente e se complementam.' },
+  ]},
+  { cat: 'Geral', items: [
+    { q: 'O Cuponauta e seguro?', a: 'Sim. Nao pedimos nenhum dado pessoal, login ou senha. Voce interage so pelo WhatsApp.' },
+    { q: 'Voces ganham comissao nas compras?', a: 'Sim, usamos links de afiliado. Quando voce compra pelo link indicado, recebemos uma pequena comissao da loja, sem custo adicional para voce.' },
+    { q: 'Como entro em contato?', a: 'Pelo Instagram @cuponautaai ou pela pagina de contato.' },
+  ]},
+];
+
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
   return (
-    <header style={{display:"flex",alignItems:"center",gap:18,padding:"16px clamp(20px,5vw,64px)",background:scrolled?"rgba(3,8,26,.78)":"rgba(3,8,26,.35)",backdropFilter:"blur(14px)",borderBottom:scrolled?"1px solid var(--cp-stroke)":"1px solid transparent",position:"sticky",top:0,zIndex:20,transition:"all 240ms ease"}}>
-      <a href="index.html" style={{display:"inline-flex",textDecoration:"none",lineHeight:0}}>
-        <img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:42,width:"auto",filter:"drop-shadow(0 0 12px var(--cp-accent-glow))"}}/>
+    <header style={{display:'flex',alignItems:'center',gap:18,padding:'16px clamp(20px,5vw,64px)',background:scrolled?'rgba(3,8,26,.78)':'rgba(3,8,26,.35)',backdropFilter:'blur(14px)',borderBottom:scrolled?'1px solid var(--cp-stroke)':'1px solid transparent',position:'sticky',top:0,zIndex:20,transition:'all 240ms ease'}}>
+      <a href='index.html' style={{display:'inline-flex',textDecoration:'none',lineHeight:0}}>
+        <img src='assets/logo-cuponauta.png' alt='Cuponauta' style={{height:42,width:'auto',filter:'drop-shadow(0 0 12px var(--cp-accent-glow))'}}/>
       </a>
       <div style={{flex:1}}/>
-      <a href="index.html" style={{fontFamily:"var(--cp-font-display)",fontWeight:800,fontSize:13,textTransform:"uppercase",letterSpacing:"0.04em",color:"#03081a",background:"var(--cp-accent)",padding:"10px 18px",borderRadius:999,textDecoration:"none",boxShadow:"0 0 14px var(--cp-accent-glow-strong)"}}>
+      <a href='index.html' style={{fontFamily:'var(--cp-font-display)',fontWeight:800,fontSize:13,textTransform:'uppercase',letterSpacing:'0.04em',color:'#03081a',background:'var(--cp-accent)',padding:'10px 18px',borderRadius:999,textDecoration:'none',boxShadow:'0 0 14px var(--cp-accent-glow-strong)'}}>
         Voltar ao site
       </a>
     </header>
@@ -43,68 +63,32 @@ function Header() {
 }
 
 function Footer() {
+  const links = [['FAQ','faq.html'],['Contato','contato.html'],['Termos','termos.html'],['Privacidade','privacidade.html']];
   return (
-    <footer style={{padding:"56px clamp(20px,5vw,64px) 36px",borderTop:"1px solid var(--cp-stroke)",background:"rgba(3,8,26,.7)"}}>
-      <div style={{maxWidth:1240,margin:"0 auto"}}>
-        <div style={{display:"flex",flexWrap:"wrap",gap:32,marginBottom:36,justifyContent:"space-between"}}>
-          <div style={{maxWidth:280}}>
-            <a href="index.html" style={{display:"inline-flex",textDecoration:"none"}}>
-              <img src="assets/logo-cuponauta.png" alt="Cuponauta" style={{height:40,filter:"drop-shadow(0 0 10px var(--cp-accent-glow))"}}/>
-            </a>
-            <p style={{color:"var(--cp-fg-3)",fontFamily:"var(--cp-font-body)",fontSize:13,marginTop:16,lineHeight:1.55}}>As melhores ofertas direto no seu WhatsApp. Sem ruído, sem spam.</p>
-          </div>
-          <div style={{display:"flex",gap:48,flexWrap:"wrap"}}>
-            {[["Ajuda",[["Perguntas frequentes","faq.html"],["Contato","contato.html"],["Termos de uso","termos.html"],["Política de privacidade","privacidade.html"]]]].map(([title,items])=>(
-              <div key={title}>
-                <div style={{fontFamily:"var(--cp-font-display)",fontWeight:700,fontSize:12,textTransform:"uppercase",letterSpacing:"0.14em",color:"var(--cp-blue-300)",marginBottom:14}}>{title}</div>
-                {items.map(([label,href])=>(
-                  <a key={label} href={href} style={{display:"block",color:"var(--cp-fg-2)",fontFamily:"var(--cp-font-body)",fontSize:13,marginBottom:10,textDecoration:"none"}}>{label}</a>
-                ))}
-              </div>
-            ))}
-          </div>
+    <footer style={{padding:'48px clamp(20px,5vw,64px) 32px',borderTop:'1px solid var(--cp-stroke)',background:'rgba(3,8,26,.7)'}}>
+      <div style={{maxWidth:1240,margin:'0 auto',display:'flex',flexWrap:'wrap',justifyContent:'space-between',alignItems:'center',gap:20}}>
+        <a href='index.html'><img src='assets/logo-cuponauta.png' alt='Cuponauta' style={{height:36,filter:'drop-shadow(0 0 8px var(--cp-accent-glow))'}}/></a>
+        <div style={{display:'flex',gap:24,flexWrap:'wrap'}}>
+          {links.map(([l,h]) => <a key={l} href={h} style={{fontFamily:'var(--cp-font-body)',fontSize:13,color:'var(--cp-fg-2)',textDecoration:'none'}}>{l}</a>)}
         </div>
-        <div style={{paddingTop:22,borderTop:"1px solid var(--cp-stroke)",display:"flex",justifyContent:"space-between",color:"var(--cp-fg-3)",fontFamily:"var(--cp-font-mono)",fontSize:11,flexWrap:"wrap",gap:12}}>
-          <span>© 2026 CUPONAUTA</span><span>FEITO NO BRASIL</span>
-        </div>
+        <span style={{fontFamily:'var(--cp-font-mono)',fontSize:11,color:'var(--cp-fg-3)'}}>© 2026 CUPONAUTA</span>
       </div>
     </footer>
   );
 }
 
-const faqs = [
-  { cat: "O Bot", items: [
-    { q: "Como funciona o bot do Cuponauta?", a: "Você envia o link de qualquer produto do Mercado Livre direto no WhatsApp do bot. Ele monitora o preço 24h por dia e te avisa quando o preço cair ou um cupom estiver disponível." },
-    { q: "O bot é gratuito?", a: "Sim, 100% gratuito. Você não paga nada para usar o bot." },
-    { q: "Quais lojas o bot monitora?", a: "Atualmente o bot monitora produtos do Mercado Livre. Mais lojas estão chegando em breve." },
-    { q: "Quantos produtos posso monitorar?", a: "Você pode monitorar vários produtos simultaneamente. Basta enviar os links um por um para o bot." },
-    { q: "Como acesso o bot?", a: "Clique em "Falar com o bot" em qualquer página do Cuponauta. Você será redirecionado para o WhatsApp." },
-  ]},
-  { cat: "O Grupo", items: [
-    { q: "O que é o Grupo do Cuponauta?", a: "É um grupo no WhatsApp onde compartilhamos as melhores promoções do dia: Mercado Livre, Shopee, iFood, Magalu e Amazon. As ofertas chegam automaticamente ao longo do dia." },
-    { q: "O grupo também é gratuito?", a: "Sim, entrar no grupo é completamente gratuito." },
-    { q: "Com que frequência chegam as promoções?", a: "Ao longo do dia, conforme as melhores ofertas aparecem. A gente filtra antes de mandar para não encher o seu chat." },
-    { q: "Posso usar o bot e o grupo ao mesmo tempo?", a: "Claro! Os dois funcionam de forma independente e se complementam muito bem." },
-  ]},
-  { cat: "Geral", items: [
-    { q: "O Cuponauta é seguro?", a: "Sim. Não pedimos nenhum dado pessoal, login ou senha. Você interage apenas pelo WhatsApp." },
-    { q: "Vocês ganham comissão nas compras?", a: "Sim, usamos links de afiliado. Quando você compra pelo link indicado, recebemos uma pequena comissão da loja — sem custo adicional para você." },
-    { q: "Como entro em contato?", a: "Pelo Instagram @cuponautaai ou pela nossa página de contato." },
-  ]},
-];
-
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{borderBottom:"1px solid var(--cp-stroke)"}}>
-      <button onClick={() => setOpen(o => !o)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",textAlign:"left",padding:"22px 0",display:"flex",alignItems:"center",justifyContent:"space-between",gap:16}}>
-        <span style={{fontFamily:"var(--cp-font-display)",fontWeight:800,fontSize:16,color:"#fff",textTransform:"uppercase",letterSpacing:"0.02em",lineHeight:1.3}}>{q}</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cp-accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{flex:"none",transform:open?"rotate(45deg)":"none",transition:"transform 240ms ease"}}>
-          <path d="M12 5v14M5 12h14"/>
+    <div style={{borderBottom:'1px solid var(--cp-stroke)'}}>
+      <button onClick={() => setOpen(o => !o)} style={{width:'100%',background:'none',border:'none',cursor:'pointer',textAlign:'left',padding:'22px 0',display:'flex',alignItems:'center',justifyContent:'space-between',gap:16}}>
+        <span style={{fontFamily:'var(--cp-font-display)',fontWeight:800,fontSize:16,color:'#fff',textTransform:'uppercase',letterSpacing:'0.02em',lineHeight:1.3}}>{q}</span>
+        <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='var(--cp-accent)' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round' style={{flex:'none',transform:open?'rotate(45deg)':'none',transition:'transform 240ms ease'}}>
+          <path d='M12 5v14M5 12h14'/>
         </svg>
       </button>
-      <div style={{maxHeight:open?400:0,overflow:"hidden",transition:"max-height 300ms ease"}}>
-        <p style={{fontFamily:"var(--cp-font-body)",fontSize:15,color:"var(--cp-fg-2)",lineHeight:1.65,paddingBottom:20,margin:0}}>{a}</p>
+      <div style={{maxHeight:open?400:0,overflow:'hidden',transition:'max-height 300ms ease'}}>
+        <p style={{fontFamily:'var(--cp-font-body)',fontSize:15,color:'var(--cp-fg-2)',lineHeight:1.65,paddingBottom:20,margin:0}}>{a}</p>
       </div>
     </div>
   );
@@ -114,22 +98,22 @@ function App() {
   return (
     <div>
       <Header/>
-      <section style={{padding:"64px clamp(20px,5vw,64px) 96px",maxWidth:800,margin:"0 auto"}}>
-        <div style={{textAlign:"center",marginBottom:56}}>
-          <div style={{fontFamily:"var(--cp-font-display)",fontWeight:700,fontSize:12,textTransform:"uppercase",letterSpacing:"0.14em",color:"var(--cp-accent)",marginBottom:12}}>Tire suas dúvidas</div>
-          <h1 style={{fontFamily:"var(--cp-font-display)",fontWeight:900,fontSize:"clamp(36px,5vw,64px)",lineHeight:.95,letterSpacing:"-0.025em",textTransform:"uppercase",color:"#fff",margin:0}}>
-            PERGUNTAS<br/><span style={{color:"var(--cp-accent)"}}>FREQUENTES</span>
+      <section style={{padding:'64px clamp(20px,5vw,64px) 96px',maxWidth:800,margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:56}}>
+          <div style={{fontFamily:'var(--cp-font-display)',fontWeight:700,fontSize:12,textTransform:'uppercase',letterSpacing:'0.14em',color:'var(--cp-accent)',marginBottom:12}}>Tire suas duvidas</div>
+          <h1 style={{fontFamily:'var(--cp-font-display)',fontWeight:900,fontSize:'clamp(36px,5vw,64px)',lineHeight:.95,letterSpacing:'-0.025em',textTransform:'uppercase',color:'#fff',margin:0}}>
+            PERGUNTAS<br/><span style={{color:'var(--cp-accent)'}}>FREQUENTES</span>
           </h1>
         </div>
-        {faqs.map(({cat,items}) => (
+        {faqs.map(({cat, items}) => (
           <div key={cat} style={{marginBottom:48}}>
-            <div style={{fontFamily:"var(--cp-font-mono)",fontSize:11,color:"var(--cp-accent)",letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:4}}>{cat}</div>
-            {items.map(({q,a}) => <FaqItem key={q} q={q} a={a}/>)}
+            <div style={{fontFamily:'var(--cp-font-mono)',fontSize:11,color:'var(--cp-accent)',letterSpacing:'0.14em',textTransform:'uppercase',marginBottom:4}}>{cat}</div>
+            {items.map(({q, a}) => <FaqItem key={q} q={q} a={a}/>)}
           </div>
         ))}
-        <div style={{marginTop:64,textAlign:"center",padding:"40px 32px",background:"linear-gradient(180deg,rgba(15,38,96,.6),rgba(6,17,48,.8))",borderRadius:20,border:"1px solid var(--cp-stroke-strong)"}}>
-          <p style={{fontFamily:"var(--cp-font-body)",fontSize:16,color:"var(--cp-fg-2)",margin:"0 0 20px"}}>Não encontrou o que procurava?</p>
-          <a href="contato.html" style={{fontFamily:"var(--cp-font-display)",fontWeight:900,fontSize:14,textTransform:"uppercase",letterSpacing:"0.04em",color:"#03081a",background:"var(--cp-accent)",padding:"14px 26px",borderRadius:999,textDecoration:"none",display:"inline-block",boxShadow:"0 0 14px var(--cp-accent-glow-strong)"}}>Falar no Instagram</a>
+        <div style={{marginTop:64,textAlign:'center',padding:'40px 32px',background:'linear-gradient(180deg,rgba(15,38,96,.6),rgba(6,17,48,.8))',borderRadius:20,border:'1px solid rgba(91,168,255,.3)'}}>
+          <p style={{fontFamily:'var(--cp-font-body)',fontSize:16,color:'var(--cp-fg-2)',margin:'0 0 20px'}}>Nao encontrou o que procurava?</p>
+          <a href='contato.html' style={{fontFamily:'var(--cp-font-display)',fontWeight:900,fontSize:14,textTransform:'uppercase',letterSpacing:'0.04em',color:'#03081a',background:'var(--cp-accent)',padding:'14px 26px',borderRadius:999,textDecoration:'none',display:'inline-block',boxShadow:'0 0 14px var(--cp-accent-glow-strong)'}}>Falar com a gente</a>
         </div>
       </section>
       <Footer/>
@@ -137,7 +121,7 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 </body>
 </html>
