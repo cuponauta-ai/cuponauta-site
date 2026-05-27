@@ -353,10 +353,6 @@ function BrandTile({ brand }) {
       <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", background: brand.bg, color: brand.fg, fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: brand.name.length > 8 ? 18 : 22, textTransform: "uppercase", letterSpacing: "-0.01em", textAlign: "center", padding: "10px" }}>
         {brand.name}
       </div>
-      <div style={{ padding: "10px 12px", background: "rgba(6,17,48,.85)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontFamily: "var(--cp-font-display)", fontWeight: 700, fontSize: 11, color: "var(--cp-fg-3)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Monitorando</span>
-        <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--cp-success)", boxShadow: "0 0 8px var(--cp-success)", animation: "cpPulse 1.8s ease-in-out infinite" }}></span>
-      </div>
     </div>
   );
 }
