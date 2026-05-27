@@ -428,4 +428,33 @@ function Footer() {
   );
 }
 
-Object.assign(window, { HeroA, HeroB, HeroC, BotVsGrupo, ComoFunciona, Marcas, FinalCTA, Footer });
+// =============================================================
+// VIDEO TUTORIAL
+// =============================================================
+function VideoTutorial({ d }) {
+  return (
+    <section style={{ position: "relative", padding: `${d.s(80)}px clamp(20px, 5vw, 64px)`, borderTop: "1px solid var(--cp-stroke)", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%, var(--cp-accent-glow) 0%, transparent 55%)", pointerEvents: "none" }}></div>
+      <div style={{ position: "relative", maxWidth: 860, margin: "0 auto", textAlign: "center" }}>
+        <Eyebrow color="var(--cp-accent)">Como usar</Eyebrow>
+        <h2 style={{ fontFamily: "var(--cp-font-display)", fontWeight: 900, fontSize: "clamp(30px, 4.5vw, 52px)", lineHeight: 1, letterSpacing: "-0.02em", textTransform: "uppercase", color: "#fff", margin: "10px 0 16px" }}>
+          Veja como é <span style={{ color: "var(--cp-accent)" }}>fácil entrar</span>
+        </h2>
+        <p style={{ fontFamily: "var(--cp-font-body)", fontSize: 16, color: "var(--cp-fg-2)", lineHeight: 1.6, maxWidth: 520, margin: "0 auto 36px" }}>
+          Em menos de 1 minuto você já está recebendo ofertas no WhatsApp.
+        </p>
+        <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", border: "1px solid var(--cp-stroke-strong)", boxShadow: "0 0 48px var(--cp-accent-glow), 0 24px 60px rgba(0,0,0,.6)", aspectRatio: "16 / 9" }}>
+          <iframe
+            src="https://player.vimeo.com/video/1196146625?badge=0&autopause=0&player_id=0&app_id=58479&color=5BA8FF&title=0&byline=0&portrait=0"
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            allowFullScreen
+            title="Tutorial Cuponauta"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { HeroA, HeroB, HeroC, BotVsGrupo, ComoFunciona, VideoTutorial, Marcas, FinalCTA, Footer });
