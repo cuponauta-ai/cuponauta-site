@@ -417,7 +417,17 @@ function Footer() {
         </div>
         <div style={{ paddingTop: 22, borderTop: "1px solid var(--cp-stroke)", display: "flex", justifyContent: "space-between", alignItems: "center", color: "var(--cp-fg-3)", fontFamily: "var(--cp-font-mono)", fontSize: 11, flexWrap: "wrap", gap: 12 }}>
           <span>© 2026 CUPONAUTA</span>
-          <span>FEITO NO BRASIL</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ color: "var(--cp-fg-3)", fontFamily: "var(--cp-font-mono)", fontSize: 11 }}>WEBSITE PRODUZIDO POR</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" height="28" role="img" aria-label="Arcanjo Tech" style={{ display: "block" }}>
+              <g fill="#0FA47A" fillRule="evenodd">
+                <path d="M40 8 L70 66 H10 Z M40 24 L56.5 56 H23.5 Z M14 44 H66 V50 H14 Z"/>
+              </g>
+              <circle cx="40" cy="8" r="4.5" fill="#34D399"/>
+              <text x="92" y="45" fontFamily="'Space Grotesk','Inter',Arial,sans-serif" fontSize="26" fontWeight="700" letterSpacing="1" fill="#ffffff">ARCANJO</text>
+              <text x="92" y="66" fontFamily="'Inter',Arial,sans-serif" fontSize="15" fontWeight="500" letterSpacing="17" fill="#9CA3AF">TECH</text>
+            </svg>
+          </div>
         </div>
       </div>
     </footer>
